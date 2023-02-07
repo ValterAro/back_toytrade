@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TradeService {
 
-    @Resource
-    private ToysService toysService;
+//    @Resource
+//    private ToysService toysService;
 
+        public List<> getToysByCategory() {
+
+        }
 
 
 

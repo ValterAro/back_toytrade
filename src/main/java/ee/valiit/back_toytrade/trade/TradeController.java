@@ -12,7 +12,7 @@ public class TradeController {
     @Resource
     private TradeService tradeService;
 
-    @GetMapping ("/trades") {};
+//    @GetMapping ("/trades") {};
 
 
 }
