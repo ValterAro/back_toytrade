@@ -1,4 +1,4 @@
-package ee.valiit.back_toytrade.trade;
+package ee.valiit.back_toytrade.domain.toy;
 
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

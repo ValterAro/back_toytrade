@@ -1,5 +1,6 @@
-package ee.valiit.back_toytrade.trade;
+package ee.valiit.back_toytrade.trade.Dto;
 
+import ee.valiit.back_toytrade.domain.toy.Toy;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;

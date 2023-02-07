@@ -1,5 +1,6 @@
-package ee.valiit.back_toytrade.trade;
+package ee.valiit.back_toytrade.trade.Dto;
 
+import ee.valiit.back_toytrade.trade.Category;
 import lombok.Data;
 
 import java.io.Serializable;
