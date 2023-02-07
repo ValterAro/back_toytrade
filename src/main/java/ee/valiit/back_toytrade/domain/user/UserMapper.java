@@ -1,6 +1,7 @@
 package ee.valiit.back_toytrade.domain.user;
 
-import ee.valiit.back_toytrade.domain.user.role.LoginResponse;
+import ee.valiit.back_toytrade.trade.dto.LoginResponse;
+import ee.valiit.back_toytrade.trade.Status;
 import ee.valiit.back_toytrade.trade.dto.UserDto;
 import org.mapstruct.*;
 
@@ -13,8 +14,8 @@ public interface UserMapper {
     LoginResponse toDto(User user);
 
 
-    @Mapping(source = "username", target = "username")
-    @Mapping(source = "password", target = "password")
+    @Mapping(constant = Status.ACTIVE, target = "status")
+    @Mapping(constant = "3", target = "points")
     User toEntity(UserDto userDto);
 
 }

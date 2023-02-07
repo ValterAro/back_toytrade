@@ -19,7 +19,10 @@ public class UserService {
     }
 
     public void addNewUser(User user) {
-
       userRepository.save(user);
+    }
+
+    public boolean userExists(String username) {
+        return userRepository.userExists(username);
     }
 }

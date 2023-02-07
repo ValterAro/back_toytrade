@@ -1,6 +1,6 @@
 package ee.valiit.back_toytrade.trade;
 
-import ee.valiit.back_toytrade.domain.user.role.LoginResponse;
+import ee.valiit.back_toytrade.trade.dto.LoginResponse;
 import ee.valiit.back_toytrade.trade.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
@@ -18,7 +18,7 @@ public class LoginController {
         return loginService.login(username, password);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/register")
     @Operation(summary = "Regamine käib siit", description = "Siit saab regada")
     public void addNewUser(@RequestBody UserDto userDto) {
          loginService.addNewUser(userDto);
