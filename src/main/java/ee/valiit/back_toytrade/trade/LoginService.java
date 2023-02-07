@@ -1,10 +1,8 @@
 package ee.valiit.back_toytrade.trade;
 
-import ee.valiit.back_toytrade.domain.user.User;
-import ee.valiit.back_toytrade.domain.user.UserMapper;
-import ee.valiit.back_toytrade.domain.user.UserRepository;
-import ee.valiit.back_toytrade.domain.user.UserService;
+import ee.valiit.back_toytrade.domain.user.*;
 import ee.valiit.back_toytrade.domain.user.role.LoginResponse;
+import ee.valiit.back_toytrade.trade.dto.UserDto;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -27,4 +25,16 @@ public class LoginService {
         return userMapper.toDto(user);
 
     }
+
+    public void addNewUser(UserDto userDto) {
+
+        User user = userMapper.toEntity(userDto);
+        User checkUser = userService.findUser(user.getUsername(), user.getPassword());
+        if (checkUser == null) {
+
+            userService.addNewUser(user);
+
+        }
+    }
+
 }

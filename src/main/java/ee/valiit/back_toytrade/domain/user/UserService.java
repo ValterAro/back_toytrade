@@ -17,4 +17,9 @@ public class UserService {
         return Validator.getValidUser(user);
 
     }
+
+    public void addNewUser(User user) {
+
+      userRepository.save(user);
+    }
 }
