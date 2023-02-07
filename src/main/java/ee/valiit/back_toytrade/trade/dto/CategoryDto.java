@@ -1,4 +1,4 @@
-package ee.valiit.back_toytrade.trade.Dto;
+package ee.valiit.back_toytrade.trade.dto;
 
 import ee.valiit.back_toytrade.trade.Category;
 import lombok.Data;

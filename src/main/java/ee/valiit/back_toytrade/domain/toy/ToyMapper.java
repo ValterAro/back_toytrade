@@ -1,6 +1,6 @@
 package ee.valiit.back_toytrade.domain.toy;
 
-import ee.valiit.back_toytrade.trade.Dto.ToyDto;
+import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import org.mapstruct.*;
 
 import java.util.List;
