@@ -1,24 +1,29 @@
-INSERT INTO public.role (id, type) VALUES (DEFAULT, 'admin');
-INSERT INTO public.role (id, type) VALUES (DEFAULT, 'customer');
-
 INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Tallinn');
 INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Tartu');
-INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Pärnu');
+INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Kuressaare');
 
-INSERT INTO public.transaction (id, type) VALUES (DEFAULT, 'sularaha sisse');
-INSERT INTO public.transaction (id, type) VALUES (DEFAULT, 'sularaha välja');
-INSERT INTO public.transaction (id, type) VALUES (DEFAULT, 'makse');
+INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Autod');
+INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Nukud');
+INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Legod');
+INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Lauamängud');
+INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Klotsid');
 
-INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 1, 'admin', '123', 'A');
-INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 2, 'rain', '123', 'A');
-INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 1, 'roby', '123', 'A');
+INSERT INTO public.condition (id, name) VALUES (DEFAULT, 'Nagu uus');
+INSERT INTO public.condition (id, name) VALUES (DEFAULT, 'Kulunud');
+INSERT INTO public.condition (id, name) VALUES (DEFAULT, 'Räsitud');
 
-INSERT INTO public.location (id, city_id, name, number_of_atms, picture, status, longitude, latitude) VALUES (DEFAULT, 1, 'Sikupilli Prisma', 4, null, 'A', null, null);
-INSERT INTO public.location (id, city_id, name, number_of_atms, picture, status, longitude, latitude) VALUES (DEFAULT, 2, 'Jõe Prisma', 3, null, 'A', null, null);
+INSERT INTO public.role (id, name) VALUES (DEFAULT, 'admin');
+INSERT INTO public.role (id, name) VALUES (DEFAULT, 'user');
 
-INSERT INTO public.location_transaction (id, location_id, transaction_id, available) VALUES (DEFAULT, 1, 1, true);
-INSERT INTO public.location_transaction (id, location_id, transaction_id, available) VALUES (DEFAULT, 1, 2, true);
-INSERT INTO public.location_transaction (id, location_id, transaction_id, available) VALUES (DEFAULT, 1, 3, true);
-INSERT INTO public.location_transaction (id, location_id, transaction_id, available) VALUES (DEFAULT, 2, 1, true);
-INSERT INTO public.location_transaction (id, location_id, transaction_id, available) VALUES (DEFAULT, 2, 2, true);
-INSERT INTO public.location_transaction (id, location_id, transaction_id, available) VALUES (DEFAULT, 2, 3, false);
+INSERT INTO public."user" (id, role_id, username, password, points, mobile, status) VALUES (DEFAULT, 1, 'helar', '123', 3, '7', 'A');
+INSERT INTO public."user" (id, role_id, username, password, points, mobile, status) VALUES (DEFAULT, 2, 'valter', '123', 3, '8', 'A');
+INSERT INTO public."user" (id, role_id, username, password, points, mobile, status) VALUES (DEFAULT, 2, 'roby', '123', 3, '9', 'A');
+
+INSERT INTO public.toy (id, user_id, city_id, condition_id, category_id, name, description, picture, status) VALUES (DEFAULT, 1, 1, 1, 1, 'Puldiauto Ferrari', '2-aastastele ideaalne puldiauto, isegi patareid on olemas', '1', 'A');
+INSERT INTO public.toy (id, user_id, city_id, condition_id, category_id, name, description, picture, status) VALUES (DEFAULT, 1, 2, 2, 2, 'Barbie nukk', 'Natuke kurb, sest Ken on kadnunud', '2', 'A');
+INSERT INTO public.toy (id, user_id, city_id, condition_id, category_id, name, description, picture, status) VALUES (DEFAULT, 2, 3, 3, 3, 'Legokomplekt Harry Potter', 'Paljukasutatud legokomplekt Harry Potteri võlumaailmast. Mõned klotsid puudu', '1', 'A');
+
+
+
+
+
