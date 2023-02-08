@@ -24,5 +24,6 @@ public class ToyService {
 
     public void addNewToy(Toy toy) {
         toyRepository.save(toy);
+
     }
 }
