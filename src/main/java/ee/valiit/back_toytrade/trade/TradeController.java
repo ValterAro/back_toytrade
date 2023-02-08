@@ -3,10 +3,7 @@ package ee.valiit.back_toytrade.trade;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,10 @@ public class TradeController {
         return tradeService.getToysByCategory(categoryId);
     }
 
+//    @PostMapping("/trade")
+//    @Operation(summary = "Enam ei jaksa", description = "dd")
+//    public void setToyCategories(@RequestBody categoryIdsDto) {
+//        tradeService.setToyCategories(categoryIds);
+//    }
 
 }

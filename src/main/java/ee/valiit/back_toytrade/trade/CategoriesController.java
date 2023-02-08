@@ -1,6 +1,6 @@
 package ee.valiit.back_toytrade.trade;
 
-import ee.valiit.back_toytrade.domain.category.Category;
+import ee.valiit.back_toytrade.trade.dto.CategoryDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class CategoriesController {
 
     @GetMapping("/categories")
     @Operation(summary = "Toob ära kõik toodete kategooriad", description = "Võtab db tabelist category kõik kategooriad")
-    public List<Category> getAllCategories() {
+    public List<CategoryDto> getAllCategories() {
         return categoriesService.getAllCategories();
     }
 
