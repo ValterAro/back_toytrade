@@ -3,6 +3,7 @@ package ee.valiit.back_toytrade.domain.toy;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -12,8 +13,11 @@ public class ToyService {
     private ToyRepository toyRepository;
 
     public List<Toy> findActiveListedToys(Integer categoryId) {
-        List<Toy> listedToys = toyRepository.findListedToys(categoryId, "A");
-        return listedToys;
+        if (categoryId == 0) {
+            return toyRepository.findActiveToys("A");
+        } else {
+            return toyRepository.findListedToys(categoryId, "A");
+        }
     }
 
 

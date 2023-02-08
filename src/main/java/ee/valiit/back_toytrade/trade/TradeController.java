@@ -1,6 +1,6 @@
 package ee.valiit.back_toytrade.trade;
 
-import ee.valiit.back_toytrade.trade.Dto.ToyDto;
+import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
