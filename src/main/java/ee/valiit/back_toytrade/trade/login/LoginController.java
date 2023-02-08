@@ -1,4 +1,4 @@
-package ee.valiit.back_toytrade.trade;
+package ee.valiit.back_toytrade.trade.login;
 
 import ee.valiit.back_toytrade.trade.dto.LoginResponse;
 import ee.valiit.back_toytrade.trade.dto.UserDto;

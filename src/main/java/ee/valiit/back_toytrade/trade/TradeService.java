@@ -26,5 +26,8 @@ public class TradeService {
     }
 
 
-
+    public void addNewToy(ToyDto toyDto) {
+        Toy toy = toyMapper.toEntity(toyDto);
+        toyService.addNewToy(toy);
+    }
 }

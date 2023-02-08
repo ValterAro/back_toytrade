@@ -2,8 +2,8 @@ package ee.valiit.back_toytrade.domain.toy;
 
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.category.Category;
-import ee.valiit.back_toytrade.trade.City;
-import ee.valiit.back_toytrade.trade.Condition;
+import ee.valiit.back_toytrade.domain.city.City;
+import ee.valiit.back_toytrade.domain.condition.Condition;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
