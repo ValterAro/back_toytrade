@@ -1,4 +1,4 @@
-package ee.valiit.back_toytrade.domain.user.role;
+package ee.valiit.back_toytrade.trade.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
