@@ -1,4 +1,4 @@
-package ee.valiit.back_toytrade.trade;
+package ee.valiit.back_toytrade.domain.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
 package ee.valiit.back_toytrade.trade.dto;
 
-import ee.valiit.back_toytrade.trade.Category;
+import ee.valiit.back_toytrade.domain.category.Category;
 import lombok.Data;
 
 import java.io.Serializable;
