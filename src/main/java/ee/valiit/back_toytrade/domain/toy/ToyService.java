@@ -1,5 +1,6 @@
 package ee.valiit.back_toytrade.domain.toy;
 
+import ee.valiit.back_toytrade.trade.Status;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,9 @@ public class ToyService {
 
     public List<Toy> findActiveListedToys(Integer categoryId) {
         if (categoryId == 0) {
-            return toyRepository.findActiveToys("A");
+            return toyRepository.findActiveToys(Status.ACTIVE);
         } else {
-            return toyRepository.findListedToys(categoryId, "A");
+            return toyRepository.findListedToys(categoryId, Status.ACTIVE);
         }
     }
 
