@@ -1,5 +1,6 @@
 package ee.valiit.back_toytrade.trade;
 
+import ee.valiit.back_toytrade.trade.dto.CategoryDto;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
@@ -14,10 +15,15 @@ public class TradeController {
     @Resource
     private TradeService tradeService;
 
-    @GetMapping ("/trades")
+    @GetMapping ("/all")
     @Operation(summary = "Finds toys by category and active status", description = "Finds all toys from the db 'Toy' table based on category and status")
-    public List<ToyDto> getToysByCategory(@RequestParam Integer categoryId) {
-        return tradeService.getToysByCategory(categoryId);
+    public List<ToyDto> getAllToys() {
+        return tradeService.getAllToys();
+    }
+    @PostMapping("/trades")
+    @Operation(summary = "Finds toys by category and active status", description = "Finds all toys from the db 'Toy' table based on category and status")
+    public List<ToyDto> getToysByCategories(@RequestBody List<CategoryDto> categoryDtos) {
+        return tradeService.getToysByCategories(categoryDtos);
     }
 
 //    @PostMapping("/trade")

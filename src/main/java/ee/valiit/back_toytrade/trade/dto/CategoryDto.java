@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 @Data
 public class CategoryDto implements Serializable {
-    private final Integer categoryId;
-    private final String categoryName;
+    private Integer categoryId;
+    private String categoryName;
+    private Boolean isSelected = false;
 }

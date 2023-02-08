@@ -13,12 +13,12 @@ public class ToyService {
     @Resource
     private ToyRepository toyRepository;
 
+    public List<Toy> findActiveListedToys() {
+        return toyRepository.findActiveToys(Status.ACTIVE);
+    }
+
     public List<Toy> findActiveListedToys(Integer categoryId) {
-        if (categoryId == 0) {
-            return toyRepository.findActiveToys(Status.ACTIVE);
-        } else {
-            return toyRepository.findListedToys(categoryId, Status.ACTIVE);
-        }
+        return toyRepository.findListedToys(categoryId, Status.ACTIVE);
     }
 
 

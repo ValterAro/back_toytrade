@@ -11,16 +11,14 @@ import ee.valiit.back_toytrade.domain.picture.PictureService;
 import ee.valiit.back_toytrade.domain.toy.Toy;
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserService;
-import ee.valiit.back_toytrade.domain.user.role.Role;
-import ee.valiit.back_toytrade.domain.user.role.RoleService;
+import ee.valiit.back_toytrade.trade.dto.CategoryDto;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.stereotype.Service;
 
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,8 +52,8 @@ public class TradeService {
     }
 
 
-    public List<ToyDto> getToysByCategory(Integer categoryId) {
-        List<Toy> toys = toyService.findActiveListedToys(categoryId);
+    public List<ToyDto> getAllToys() {
+        List<Toy> toys = toyService.findActiveListedToys();
         List<ToyDto> toyDtos = toyMapper.toDtos(toys);
 
         return toyDtos;
@@ -76,7 +74,18 @@ public class TradeService {
         toyService.addNewToy(toy);
     }
 
-    public void getToysByCategories(String categoryIds) {
 
+    public List<ToyDto> getToysByCategories(List<CategoryDto> categoryDtos) {
+        List<Toy> toys = getToys(categoryDtos);
+        return toyMapper.toDtos(toys);
+    }
+
+    private List<Toy> getToys(List<CategoryDto> categoryDtos) {
+        List<Toy> toys = new ArrayList<>();
+        for (CategoryDto dto : categoryDtos) {
+            Integer categoryId = dto.getCategoryId();
+            toys.addAll(toyService.findActiveListedToys(categoryId));
+        }
+        return toys;
     }
 }
