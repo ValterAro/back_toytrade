@@ -1,4 +1,4 @@
-package ee.valiit.back_toytrade.trade;
+package ee.valiit.back_toytrade.domain.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "city")
-public class City {
+@Table(name = "category")
+public class Category {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;

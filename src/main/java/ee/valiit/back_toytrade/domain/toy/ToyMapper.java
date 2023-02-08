@@ -22,5 +22,14 @@ public interface ToyMapper {
     List<ToyDto> toDtos(List<Toy> toys);
 
 
-
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "userId", target = "user.id")
+    @Mapping(source = "picture", target = "picture")
+    @Mapping(source = "cityId", target = "city.id")
+    @Mapping(source = "cityName", target = "city.name")
+    @Mapping(source = "conditionId", target = "condition.id")
+    @Mapping(source = "description", target = "description")
+    @Mapping(source = "categoryId", target = "category.id")
+    @Mapping(source = "status", target = "status")
+    Toy toEntity(ToyDto toyDto);
 }
