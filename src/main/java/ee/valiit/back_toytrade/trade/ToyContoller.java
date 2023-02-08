@@ -16,7 +16,7 @@ public class ToyContoller {
 
     @PostMapping("/toy")
     @Operation(summary = "adds toys and its properties", description = "adds picture, name, category, condition to db")
-    public void addToy(@RequestBody ToyDto toyDto) {
+    public void addNewToy(@RequestBody ToyDto toyDto) {
 
         tradeService.addNewToy(toyDto);
     }
