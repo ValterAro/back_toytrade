@@ -17,6 +17,7 @@ import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.stereotype.Service;
 
 
@@ -73,5 +74,9 @@ public class TradeService {
         toy.setCategory(categoryById.get());
 
         toyService.addNewToy(toy);
+    }
+
+    public void getToysByCategories(String categoryIds) {
+
     }
 }

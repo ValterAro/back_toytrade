@@ -10,5 +10,6 @@ import java.io.Serializable;
  */
 @Data
 public class CategoryDto implements Serializable {
-    private final Integer id;
+    private final Integer categoryId;
+    private final String categoryName;
 }
