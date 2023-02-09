@@ -36,7 +36,7 @@ public class ToyDto implements Serializable {
     @NotNull
     private  String description;
     @NotNull
-    private  byte[] picture;
+    private  String picture;
     @Size(max = 1)
     @NotNull
     private  String status;

@@ -1,11 +1,15 @@
 package ee.valiit.back_toytrade.domain.toy;
 
+import ee.valiit.back_toytrade.trade.Status;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import org.mapstruct.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+import ee.valiit.back_toytrade.infrastructure.util.PictureUtil;
+
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {PictureUtil.class})
 public interface ToyMapper {
 
     @Mapping(source = "id", target = "id")
@@ -17,19 +21,39 @@ public interface ToyMapper {
     @Mapping(source = "condition.name", target = "conditionName")
     @Mapping(source = "city.id", target = "cityId")
     @Mapping(source = "city.name", target = "cityName")
-    @Mapping(source = "picture", target = "picture")
+    @Mapping(source = "picture", target = "picture", qualifiedByName = "byteArrayToString")
     ToyDto toDto(Toy toy);
     List<ToyDto> toDtos(List<Toy> toys);
+    @Named("byteArrayToString")
+    static String byteArrayToString(byte[] picture) {
+        if (picture == null) {
+            return null;
+        } else {
+            return new String(picture);
+        }
+    }
 
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "userId", target = "user.id")
-    @Mapping(source = "picture", target = "picture")
     @Mapping(source = "cityId", target = "city.id")
     @Mapping(source = "cityName", target = "city.name")
     @Mapping(source = "conditionId", target = "condition.id")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "categoryId", target = "category.id")
-    @Mapping(source = "status", target = "status")
+    @Mapping(constant = Status.ACTIVE, target = "status")
+    @Mapping(source = "picture", target = "picture", qualifiedByName = "stringToByteArray")
     Toy toEntity(ToyDto toyDto);
+
+    @Named("stringToByteArray")
+    static byte[] stringToByteArray (String picture){
+        if (picture == null || "".equals(picture)) {
+            return null;
+        }
+        byte[] bytes = picture.getBytes(StandardCharsets.UTF_8);
+        return bytes;
+    }
+
+
+
 }
