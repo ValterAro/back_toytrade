@@ -20,9 +20,7 @@ public class ToyService {
         return toyRepository.findListedToys(categoryId, Status.ACTIVE);
     }
 
-
     public void addNewToy(Toy toy) {
         toyRepository.save(toy);
-
     }
 }

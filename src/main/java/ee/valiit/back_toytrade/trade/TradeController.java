@@ -20,16 +20,12 @@ public class TradeController {
     public List<ToyDto> getAllToys() {
         return tradeService.getAllToys();
     }
+
     @PostMapping("/trades")
     @Operation(summary = "Finds toys by category and active status", description = "Finds all toys from the db 'Toy' table based on category and status")
     public List<ToyDto> getToysByCategories(@RequestBody List<CategoryDto> categoryDtos) {
         return tradeService.getToysByCategories(categoryDtos);
     }
 
-//    @PostMapping("/trade")
-//    @Operation(summary = "Enam ei jaksa", description = "dd")
-//    public void setToyCategories(@RequestBody categoryIdsDto) {
-//        tradeService.setToyCategories(categoryIds);
-//    }
 
 }

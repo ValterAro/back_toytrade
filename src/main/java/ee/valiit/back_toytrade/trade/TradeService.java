@@ -73,8 +73,6 @@ public class TradeService {
 
         toyService.addNewToy(toy);
     }
-
-
     public List<ToyDto> getToysByCategories(List<CategoryDto> categoryDtos) {
         List<Toy> toys = getToys(categoryDtos);
         return toyMapper.toDtos(toys);
@@ -84,7 +82,10 @@ public class TradeService {
         List<Toy> toys = new ArrayList<>();
         for (CategoryDto dto : categoryDtos) {
             Integer categoryId = dto.getCategoryId();
-            toys.addAll(toyService.findActiveListedToys(categoryId));
+            if (dto.getIsSelected()) {
+                toys.addAll(toyService.findActiveListedToys(categoryId));
+            }
+
         }
         return toys;
     }
