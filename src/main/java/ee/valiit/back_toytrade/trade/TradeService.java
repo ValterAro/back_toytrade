@@ -101,6 +101,12 @@ public class TradeService {
         }
         return toys;
     }
+    public List<ToyDto> getMyToys(Integer userId) {
+        List<Toy> toys = toyService.findMyToys(userId);
+        return toyMapper.toDtos(toys);
+
+
+    }
 
     public List<ConditionDto> getAllConditions() {
         List<Condition> allConditions = conditionService.getAllConditions();

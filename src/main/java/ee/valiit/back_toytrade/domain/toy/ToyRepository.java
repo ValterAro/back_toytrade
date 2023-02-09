@@ -12,6 +12,15 @@ public interface ToyRepository extends JpaRepository<Toy, Integer> {
     @Query("select t from Toy t where t.status = ?1 order by t.category.name, t.name")
     List<Toy> findActiveToys(String status);
 
+    @Query("select t from Toy t where t.user.id = ?1")
+    List<Toy> findToys(Integer id);
+
+
+
+
+
+
+
 
 
 }

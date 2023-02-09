@@ -18,6 +18,8 @@ public interface ToyMapper {
     @Mapping(source = "city.id", target = "cityId")
     @Mapping(source = "city.name", target = "cityName")
     @Mapping(source = "picture", target = "picture")
+    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.username", target = "userUsername")
     ToyDto toDto(Toy toy);
     List<ToyDto> toDtos(List<Toy> toys);
 
