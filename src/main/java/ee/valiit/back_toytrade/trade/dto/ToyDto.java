@@ -12,32 +12,32 @@ import java.io.Serializable;
  */
 @Data
 public class ToyDto implements Serializable {
-    private final Integer id;
-    private final Integer userId;
+    private  Integer id;
+    private  Integer userId;
     @Size(max = 255)
     @NotNull
-    private final String userUsername;
-    private final Integer cityId;
+    private  String userUsername;
+    private  Integer cityId;
     @Size(max = 255)
     @NotNull
-    private final String cityName;
-    private final Integer conditionId;
+    private  String cityName;
+    private  Integer conditionId;
     @Size(max = 255)
     @NotNull
-    private final String conditionName;
-    private final Integer categoryId;
+    private  String conditionName;
+    private  Integer categoryId;
     @Size(max = 255)
     @NotNull
-    private final String categoryName;
+    private  String categoryName;
     @Size(max = 255)
     @NotNull
-    private final String name;
+    private  String name;
     @Size(max = 255)
     @NotNull
-    private final String description;
+    private  String description;
     @NotNull
-    private final byte[] picture;
+    private  byte[] picture;
     @Size(max = 1)
     @NotNull
-    private final String status;
+    private  String status;
 }
