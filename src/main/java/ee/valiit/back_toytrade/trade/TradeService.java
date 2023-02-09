@@ -84,7 +84,9 @@ public class TradeService {
         List<Toy> toys = new ArrayList<>();
         for (CategoryDto dto : categoryDtos) {
             Integer categoryId = dto.getCategoryId();
-            toys.addAll(toyService.findActiveListedToys(categoryId));
+            if (dto.getIsSelected()) {
+                toys.addAll(toyService.findActiveListedToys(categoryId));
+            }
         }
         return toys;
     }
