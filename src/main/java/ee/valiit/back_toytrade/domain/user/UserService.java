@@ -5,6 +5,7 @@ import ee.valiit.back_toytrade.validator.Validator;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,5 +30,9 @@ public class UserService {
     public Optional<User> findUserById(Integer userId) {
         Optional<User> userById = userRepository.findById(userId);
         return userById;
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findActiveUsers(Status.ACTIVE);
     }
 }
