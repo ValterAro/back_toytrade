@@ -85,7 +85,6 @@ public class TradeService {
             if (dto.getIsSelected()) {
                 toys.addAll(toyService.findActiveListedToys(categoryId));
             }
-
         }
         return toys;
     }
