@@ -3,8 +3,10 @@ package ee.valiit.back_toytrade.trade;
 import ee.valiit.back_toytrade.domain.category.Category;
 import ee.valiit.back_toytrade.domain.category.CategoryService;
 import ee.valiit.back_toytrade.domain.city.City;
+import ee.valiit.back_toytrade.domain.city.CityMapper;
 import ee.valiit.back_toytrade.domain.city.CityService;
 import ee.valiit.back_toytrade.domain.condition.Condition;
+import ee.valiit.back_toytrade.domain.condition.ConditionMapper;
 import ee.valiit.back_toytrade.domain.condition.ConditionService;
 import ee.valiit.back_toytrade.domain.picture.PictureRepository;
 import ee.valiit.back_toytrade.domain.picture.PictureService;
@@ -12,6 +14,8 @@ import ee.valiit.back_toytrade.domain.toy.Toy;
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserService;
 import ee.valiit.back_toytrade.trade.dto.CategoryDto;
+import ee.valiit.back_toytrade.trade.dto.CityDto;
+import ee.valiit.back_toytrade.trade.dto.ConditionDto;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
@@ -32,7 +36,14 @@ public class TradeService {
     private ToyMapper toyMapper;
 
     @Resource
+    private CityMapper cityMapper;
+
+    @Resource
     private UserService userService;
+
+
+    @Resource
+    private ConditionMapper conditionMapper;
 
     @Resource
     private CityService cityService;
@@ -87,5 +98,17 @@ public class TradeService {
             }
         }
         return toys;
+    }
+
+    public List<ConditionDto> getAllConditions() {
+        List<Condition> allConditions = conditionService.getAllConditions();
+        return conditionMapper.toDtos(allConditions);
+
+    }
+
+    public List<CityDto> getAllCities() {
+        List<City> allCities = cityService.getAllCities();
+        return cityMapper.toDtos(allCities);
+
     }
 }
