@@ -65,9 +65,7 @@ public class TradeService {
 
     public List<ToyDto> getAllToys() {
         List<Toy> toys = toyService.findActiveListedToys();
-        List<ToyDto> toyDtos = toyMapper.toDtos(toys);
-
-        return toyDtos;
+        return toyMapper.toDtos(toys);
     }
 
 

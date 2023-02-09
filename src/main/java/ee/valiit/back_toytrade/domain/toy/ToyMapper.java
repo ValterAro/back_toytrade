@@ -12,9 +12,6 @@ import ee.valiit.back_toytrade.infrastructure.util.PictureUtil;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {PictureUtil.class})
 public interface ToyMapper {
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "description", target = "description")
     @Mapping(source = "category.id", target = "categoryId")
     @Mapping(source = "category.name", target = "categoryName")
     @Mapping(source = "condition.id", target = "conditionId")
@@ -23,7 +20,9 @@ public interface ToyMapper {
     @Mapping(source = "city.name", target = "cityName")
     @Mapping(source = "picture", target = "picture", qualifiedByName = "byteArrayToString")
     ToyDto toDto(Toy toy);
+
     List<ToyDto> toDtos(List<Toy> toys);
+
     @Named("byteArrayToString")
     static String byteArrayToString(byte[] picture) {
         if (picture == null) {
@@ -32,7 +31,6 @@ public interface ToyMapper {
             return new String(picture);
         }
     }
-
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "userId", target = "user.id")

@@ -15,8 +15,8 @@ public class TradeController {
     @Resource
     private TradeService tradeService;
 
-    @GetMapping ("/all")
-    @Operation(summary = "Finds toys by category and active status", description = "Finds all toys from the db 'Toy' table based on category and status")
+    @GetMapping("/all")
+    @Operation(summary = "Finds toys with active status", description = "Finds all toys from the db 'Toy' table with active status")
     public List<ToyDto> getAllToys() {
         return tradeService.getAllToys();
     }
