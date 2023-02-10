@@ -12,6 +12,9 @@ import ee.valiit.back_toytrade.infrastructure.util.PictureUtil;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {PictureUtil.class})
 public interface ToyMapper {
 
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "description", target = "description")
     @Mapping(source = "category.id", target = "categoryId")
     @Mapping(source = "category.name", target = "categoryName")
     @Mapping(source = "condition.id", target = "conditionId")

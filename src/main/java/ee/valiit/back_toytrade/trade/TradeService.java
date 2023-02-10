@@ -41,7 +41,6 @@ public class TradeService {
     @Resource
     private UserService userService;
 
-
     @Resource
     private ConditionMapper conditionMapper;
 
@@ -53,15 +52,6 @@ public class TradeService {
 
     @Resource
     private CategoryService categoryService;
-
-    @Resource
-    private PictureService pictureService;
-    private final PictureRepository pictureRepository;
-
-    public TradeService(PictureRepository pictureRepository) {
-        this.pictureRepository = pictureRepository;
-    }
-
 
     public List<ToyDto> getAllToys() {
         List<Toy> toys = toyService.findActiveListedToys();
