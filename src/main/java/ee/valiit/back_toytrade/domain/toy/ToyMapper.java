@@ -12,12 +12,17 @@ import ee.valiit.back_toytrade.infrastructure.util.PictureUtil;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {PictureUtil.class})
 public interface ToyMapper {
 
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "description", target = "description")
     @Mapping(source = "category.id", target = "categoryId")
     @Mapping(source = "category.name", target = "categoryName")
     @Mapping(source = "condition.id", target = "conditionId")
     @Mapping(source = "condition.name", target = "conditionName")
     @Mapping(source = "city.id", target = "cityId")
     @Mapping(source = "city.name", target = "cityName")
+    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.username", target = "userUsername")
     @Mapping(source = "picture", target = "picture", qualifiedByName = "byteArrayToString")
     ToyDto toDto(Toy toy);
 

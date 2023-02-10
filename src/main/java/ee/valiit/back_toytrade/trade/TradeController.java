@@ -26,6 +26,11 @@ public class TradeController {
     public List<ToyDto> getToysByCategories(@RequestBody List<CategoryDto> categoryDtos) {
         return tradeService.getToysByCategories(categoryDtos);
     }
+    @GetMapping("/me")
+    @Operation(summary = "Finds toys sold by me and by active status", description = "Finds all toys from the db 'Toy' table based on userId and status")
+    public List<ToyDto> getMyToys(@RequestParam Integer userId) {
+        return tradeService.getMyToys(userId);
+    }
 
 
 }
