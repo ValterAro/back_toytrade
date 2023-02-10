@@ -25,9 +25,7 @@ public class ToyService {
     return toyRepository.findToys(userId);
     }
 
-
     public void addNewToy(Toy toy) {
         toyRepository.save(toy);
-
     }
 }

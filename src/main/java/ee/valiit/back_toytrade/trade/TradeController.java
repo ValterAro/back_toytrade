@@ -15,11 +15,12 @@ public class TradeController {
     @Resource
     private TradeService tradeService;
 
-    @GetMapping ("/all")
-    @Operation(summary = "Finds toys by category and active status", description = "Finds all toys from the db 'Toy' table based on category and status")
+    @GetMapping("/all")
+    @Operation(summary = "Finds toys with active status", description = "Finds all toys from the db 'Toy' table with active status")
     public List<ToyDto> getAllToys() {
         return tradeService.getAllToys();
     }
+
     @PostMapping("/trades")
     @Operation(summary = "Finds toys by category and active status", description = "Finds all toys from the db 'Toy' table based on category and status")
     public List<ToyDto> getToysByCategories(@RequestBody List<CategoryDto> categoryDtos) {
@@ -31,10 +32,5 @@ public class TradeController {
         return tradeService.getMyToys(userId);
     }
 
-//    @PostMapping("/trade")
-//    @Operation(summary = "Enam ei jaksa", description = "dd")
-//    public void setToyCategories(@RequestBody categoryIdsDto) {
-//        tradeService.setToyCategories(categoryIds);
-//    }
 
 }
