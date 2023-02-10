@@ -18,7 +18,6 @@ public interface ToyMapper {
     @Mapping(source = "condition.name", target = "conditionName")
     @Mapping(source = "city.id", target = "cityId")
     @Mapping(source = "city.name", target = "cityName")
-    @Mapping(source = "picture", target = "picture")
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.username", target = "userUsername")
     @Mapping(source = "picture", target = "picture", qualifiedByName = "byteArrayToString")
