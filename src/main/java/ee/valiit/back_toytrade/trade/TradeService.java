@@ -24,7 +24,6 @@ import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +102,10 @@ public class TradeService {
     public List<ToyDto> getMyToys(Integer userId) {
         List<Toy> toys = toyService.findToys(userId);
         return toyMapper.toDtos(toys);
+    }
 
+    public Toy findToy(Integer toyId) {
+        return toyService.findToy(toyId);
 
     }
 
