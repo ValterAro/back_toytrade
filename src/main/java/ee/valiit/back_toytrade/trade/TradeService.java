@@ -105,4 +105,12 @@ public class TradeService {
         return cityMapper.toDtos(allCities);
 
     }
+
+    public ToyDto findToyById(Integer toyId) {
+        Optional<Toy> toyById = toyService.findToyById(toyId);
+
+
+        ToyDto toyDto = toyMapper.toDto(toyById.get());
+        return toyDto;
+    }
 }
