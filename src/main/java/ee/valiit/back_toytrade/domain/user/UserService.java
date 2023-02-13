@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public void addNewUser(User user) {
-      userRepository.save(user);
+        userRepository.save(user);
     }
 
     public boolean userExists(String username) {
@@ -35,6 +35,7 @@ public class UserService {
         return userRepository.findActiveUsers(Status.ACTIVE);
     }
 
-
-
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
 }

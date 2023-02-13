@@ -1,5 +1,6 @@
 package ee.valiit.back_toytrade.trade.dto;
 
+import ee.valiit.back_toytrade.domain.user.role.Role;
 import lombok.Data;
 
 /**
@@ -13,6 +14,4 @@ public class UserDto {
     private String password;
 
     private String mobile;
-
-
 }

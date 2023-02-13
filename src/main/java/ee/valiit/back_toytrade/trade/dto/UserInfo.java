@@ -1,5 +1,6 @@
-package ee.valiit.back_toytrade.domain.user;
+package ee.valiit.back_toytrade.trade.dto;
 
+import ee.valiit.back_toytrade.domain.user.User;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -11,20 +12,20 @@ import java.io.Serializable;
  */
 @Data
 public class UserInfo implements Serializable {
-    private final Integer id;
-    private final Integer roleId;
+    private Integer id;
+    private Integer roleId;
     @Size(max = 50)
     @NotNull
-    private final String roleName;
+    private String roleName;
     @Size(max = 255)
     @NotNull
-    private final String username;
+    private String username;
     @NotNull
-    private final Integer points;
+    private Integer points;
     @Size(max = 15)
     @NotNull
-    private final String mobile;
+    private String mobile;
     @Size(max = 1)
     @NotNull
-    private final String status;
+    private String status;
 }
