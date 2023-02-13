@@ -56,7 +56,4 @@ public interface ToyMapper {
         byte[] bytes = picture.getBytes(StandardCharsets.UTF_8);
         return bytes;
     }
-
-
-
 }

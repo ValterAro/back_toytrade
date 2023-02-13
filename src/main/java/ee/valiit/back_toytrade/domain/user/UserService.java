@@ -27,12 +27,14 @@ public class UserService {
         return userRepository.userExists(username);
     }
 
-    public Optional<User> findUserById(Integer userId) {
-        Optional<User> userById = userRepository.findById(userId);
-        return userById;
+    public User findUser(Integer userId) {
+        return userRepository.findById(userId).get();
     }
 
     public List<User> getAllUsers() {
         return userRepository.findActiveUsers(Status.ACTIVE);
     }
+
+
+
 }

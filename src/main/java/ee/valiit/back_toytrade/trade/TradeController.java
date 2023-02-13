@@ -1,5 +1,7 @@
 package ee.valiit.back_toytrade.trade;
 
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.ToyTransactionRequest;
+import ee.valiit.back_toytrade.domain.user.UserService;
 import ee.valiit.back_toytrade.trade.dto.CategoryDto;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,6 +16,9 @@ public class TradeController {
 
     @Resource
     private TradeService tradeService;
+
+    @Resource
+    private UserService userService;
 
     @GetMapping("/all")
     @Operation(summary = "Finds toys with active status", description = "Finds all toys from the db 'Toy' table with active status")
@@ -32,5 +37,17 @@ public class TradeController {
         return tradeService.getMyToys(userId);
     }
 
+    @GetMapping("/myPoints")
+    @Operation(summary = "Finds my points", description = "Finds my point total from the db 'user' table based on userId")
+    public Integer getMyPoints(@RequestParam Integer userId) {
+        return tradeService.getMyPoints(userId);
+    }
+
+    @PostMapping("/transaction")
+    @Operation(summary = "Posts a transaction", description = "Gets userId and toyId and adds a transaction to the toy_transaction table in the db")
+    public void addToyTransaction(@RequestBody ToyTransactionRequest toyTransactionRequest) {
+        tradeService.addNewTransaction(toyTransactionRequest);
+
+    }
 
 }

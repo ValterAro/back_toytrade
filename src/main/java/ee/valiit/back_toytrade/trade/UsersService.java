@@ -22,4 +22,6 @@ public class UsersService {
         List<User> allUsers = userService.getAllUsers();
         return userMapper.toInfos(allUsers);
     }
+
+
 }

@@ -1,9 +1,9 @@
 package ee.valiit.back_toytrade.domain.toy;
 
 import ee.valiit.back_toytrade.trade.Status;
-import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class ToyService {
     public List<Toy> findActiveListedToys(Integer categoryId) {
         return toyRepository.findListedToys(categoryId, Status.ACTIVE);
     }
-    public List<Toy> findMyToys(Integer userId){
+    public List<Toy> findToys(Integer userId){
     return toyRepository.findToys(userId);
     }
 
@@ -32,5 +32,9 @@ public class ToyService {
 
     public Optional<Toy> findToyById(Integer toyId) {
         return toyRepository.findById(toyId);
+    }
+
+    public Toy findToy(Integer toyId) {
+        return toyRepository.findById(toyId).get();
     }
 }
