@@ -2,11 +2,11 @@ INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Tallinn');
 INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Tartu');
 INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Kuressaare');
 
-INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Autod');
-INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Nukud');
-INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Legod');
-INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Lauamängud');
-INSERT INTO public.category (id, name) VALUES (DEFAULT, 'Klotsid');
+INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Autod','A');
+INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Nukud','A');
+INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Legod','A');
+INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Lauamängud','A');
+INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Klotsid','A');
 
 INSERT INTO public.condition (id, name) VALUES (DEFAULT, 'Nagu uus');
 INSERT INTO public.condition (id, name) VALUES (DEFAULT, 'Kulunud');
