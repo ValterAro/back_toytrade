@@ -9,10 +9,9 @@ import ee.valiit.back_toytrade.domain.condition.Condition;
 import ee.valiit.back_toytrade.domain.condition.ConditionMapper;
 import ee.valiit.back_toytrade.domain.condition.ConditionService;
 import ee.valiit.back_toytrade.domain.toy.Toy;
-import ee.valiit.back_toytrade.domain.toy.toy_transaction.ToyTransaction;
-import ee.valiit.back_toytrade.domain.toy.toy_transaction.ToyTransactionRequest;
-import ee.valiit.back_toytrade.domain.toy.toy_transaction.ToyTransactionMapper;
-import ee.valiit.back_toytrade.domain.toy.toy_transaction.ToyTransactionService;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.*;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.Terminal;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.TerminalService;
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserMapper;
 import ee.valiit.back_toytrade.domain.user.UserService;
@@ -64,6 +63,14 @@ public class TradeService {
 
     @Resource
     private ToyTransactionMapper toyTransactionMapper;
+
+    @Resource
+    private TerminalService terminalService;
+    private final ToyTransactionRepository toyTransactionRepository;
+
+    public TradeService(ToyTransactionRepository toyTransactionRepository) {
+        this.toyTransactionRepository = toyTransactionRepository;
+    }
 
     public List<ToyDto> getAllToys() {
         List<Toy> toys = toyService.findActiveListedToys();
@@ -126,24 +133,39 @@ public class TradeService {
     public void addNewTransaction(ToyTransactionRequest toyTransactionRequest) {
         Toy toy = toyService.findToy(toyTransactionRequest.getToyId());
         User buyer = userService.findUser(toyTransactionRequest.getBuyerId());
-        ToyTransaction toyTransaction = createToyTransaction(toy, buyer);
+        Terminal terminal = terminalService.findTerminal(toyTransactionRequest.getTerminalId());
+        ToyTransaction toyTransaction = createToyTransaction(toy, buyer, terminal);
         toyTransactionService.saveToyTransaction(toyTransaction);
     }
 
-    private static ToyTransaction createToyTransaction(Toy toy, User buyer) {
+    private static ToyTransaction createToyTransaction(Toy toy, User buyer, Terminal terminal) {
         ToyTransaction toyTransaction = new ToyTransaction();
         toyTransaction.setToy(toy);
         toyTransaction.setSeller(toy.getUser());
         toyTransaction.setBuyer(buyer);
-        toyTransaction.setStatus(Status.ACTIVE);
+        toyTransaction.setTerminal(terminal);
+        toyTransaction.setStatus(Status.WANTED);
         return toyTransaction;
     }
 
-    public ToyDto findToyById(Integer toyId) {
-        Optional<Toy> toyById = toyService.findToyById(toyId);
+    public void setTransactionStatusSent(Integer toyTransactionId) {
+        ToyTransaction toytransaction = toyTransactionService.findById(toyTransactionId);
+        toytransaction.setStatus(Status.SENT);
+        toyTransactionService.saveToyTransaction(toytransaction);
+    }
+    public void setTransactionStatusCompleted(Integer toyTransactionId) {
+        ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
+        User buyer = userService.findUser(toyTransaction.getBuyer().getId());
+        User seller = userService.findUser(toyTransaction.getSeller().getId());
+        buyer.setPoints(buyer.getPoints() - 1);
+        seller.setPoints(seller.getPoints() + 1);
+        toyTransaction.setStatus(Status.COMPLETED);
+        toyTransactionService.saveToyTransaction(toyTransaction);
+    }
 
-
-        ToyDto toyDto = toyMapper.toDto(toyById.get());
-        return toyDto;
+    public List<ToyTransactionDto> findTransactions(Integer userId) {
+//        User user = userService.findUser(userId);
+        List<ToyTransaction> toyTransactions = toyTransactionService.findUserTransactions(userId);
+        return toyTransactionMapper.toDtos(toyTransactions);
     }
 }

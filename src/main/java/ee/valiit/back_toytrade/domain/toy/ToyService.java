@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ToyService {
@@ -27,11 +26,6 @@ public class ToyService {
 
     public void addNewToy(Toy toy) {
         toyRepository.save(toy);
-
-    }
-
-    public Optional<Toy> findToyById(Integer toyId) {
-        return toyRepository.findById(toyId);
     }
 
     public Toy findToy(Integer toyId) {

@@ -14,4 +14,6 @@ public class ToyTransactionRequest implements Serializable {
 
     private  Integer buyerId;
 
+    private  Integer terminalId;
+
 }

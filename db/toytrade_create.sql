@@ -6,6 +6,7 @@
 CREATE TABLE category (
     id serial  NOT NULL,
     name varchar(255)  NOT NULL,
+    status char,
     CONSTRAINT category_pk PRIMARY KEY (id)
 );
 
@@ -38,6 +39,13 @@ CREATE TABLE role (
     CONSTRAINT role_pk PRIMARY KEY (id)
 );
 
+-- Table: terminal
+CREATE TABLE terminal (
+                          id serial  NOT NULL,
+                          name varchar(255)  NOT NULL,
+                          CONSTRAINT terminal_pk PRIMARY KEY (id)
+);
+
 -- Table: toy
 CREATE TABLE toy (
     id serial  NOT NULL,
@@ -54,12 +62,13 @@ CREATE TABLE toy (
 
 -- Table: toy_transaction
 CREATE TABLE toy_transaction (
-    id serial  NOT NULL,
-    toy_id int  NOT NULL,
-    seller_id int  NOT NULL,
-    buyer_id int  NOT NULL,
-    status char(2)  NOT NULL,
-    CONSTRAINT toy_transaction_pk PRIMARY KEY (id)
+                                 id serial  NOT NULL,
+                                 toy_id int  NOT NULL,
+                                 seller_id int  NOT NULL,
+                                 buyer_id int  NOT NULL,
+                                 status char(2)  NOT NULL,
+                                 terminal_id int  NOT NULL,
+                                 CONSTRAINT toy_transaction_pk PRIMARY KEY (id)
 );
 
 -- Table: user
@@ -118,9 +127,17 @@ ALTER TABLE toy_transaction ADD CONSTRAINT toy_transaction_buyer
 -- Reference: toy_transaction_seller (table: toy_transaction)
 ALTER TABLE toy_transaction ADD CONSTRAINT toy_transaction_seller
     FOREIGN KEY (seller_id)
-    REFERENCES "user" (id)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
+        REFERENCES "user" (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: toy_transaction_terminal (table: toy_transaction)
+ALTER TABLE toy_transaction ADD CONSTRAINT toy_transaction_terminal
+    FOREIGN KEY (terminal_id)
+        REFERENCES terminal (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
 ;
 
 -- Reference: toy_transaction_toy (table: toy_transaction)

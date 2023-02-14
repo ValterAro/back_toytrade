@@ -1,5 +1,7 @@
 package ee.valiit.back_toytrade.trade;
 
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.ToyTransaction;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.ToyTransactionDto;
 import ee.valiit.back_toytrade.domain.toy.toy_transaction.ToyTransactionRequest;
 import ee.valiit.back_toytrade.domain.user.UserService;
 import ee.valiit.back_toytrade.trade.dto.CategoryDto;
@@ -47,6 +49,24 @@ public class TradeController {
     @Operation(summary = "Posts a transaction", description = "Gets userId and toyId and adds a transaction to the toy_transaction table in the db")
     public void addToyTransaction(@RequestBody ToyTransactionRequest toyTransactionRequest) {
         tradeService.addNewTransaction(toyTransactionRequest);
+    }
+
+    @PutMapping("/transaction-sent")
+    @Operation(summary = "updates transaction status to Sent", description = "Gets toyTransactionId and updates the status of toy transaction table in db to SENT")
+    public void setToyTransactionToSent(@RequestParam Integer toyTransactionId) {
+        tradeService.setTransactionStatusSent(toyTransactionId);
+
+    }
+    @PutMapping("/transaction-completed")
+    @Operation(summary = "updates transaction status to Completed", description = "Gets toyTransactionId and updates the status of toy transaction table in db to COMPLETED")
+    public void setToyTransactionToCompleted(@RequestParam Integer toyTransactionId) {
+        tradeService.setTransactionStatusCompleted(toyTransactionId);
+    }
+
+    @GetMapping("/my-transactions")
+    @Operation(summary = "gets users transactions", description = "Gets users transactions based on userId from the toys transaction db where user is buyer or seller")
+    public List<ToyTransactionDto> getMyTransactions(@RequestParam Integer userId) {
+        return tradeService.findTransactions(userId);
 
     }
 

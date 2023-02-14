@@ -1,6 +1,7 @@
 package ee.valiit.back_toytrade.domain.toy.toy_transaction;
 
 import ee.valiit.back_toytrade.domain.toy.Toy;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.Terminal;
 import ee.valiit.back_toytrade.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +31,11 @@ public class ToyTransaction {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "terminal_id", nullable = false)
+    private Terminal terminal;
 
     @Size(max = 2)
     @NotNull
