@@ -1,7 +1,7 @@
 package ee.valiit.back_toytrade.trade.login;
 
 import ee.valiit.back_toytrade.trade.dto.LoginResponse;
-import ee.valiit.back_toytrade.trade.dto.UserDto;
+import ee.valiit.back_toytrade.trade.dto.NewUserRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +20,8 @@ public class LoginController {
 
     @PostMapping("/register")
     @Operation(summary = "Regamine käib siit", description = "Siit saab regada")
-    public void addNewUser(@RequestBody UserDto userDto) {
-         loginService.addNewUser(userDto);
+    public void addNewUser(@RequestBody NewUserRequest newUserRequest) {
+         loginService.addNewUser(newUserRequest);
     }
 
 }

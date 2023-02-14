@@ -1,5 +1,7 @@
 package ee.valiit.back_toytrade.domain.user;
 
+import ee.valiit.back_toytrade.domain.user.role.Role;
+import ee.valiit.back_toytrade.domain.user.role.RoleRepository;
 import ee.valiit.back_toytrade.trade.Status;
 import ee.valiit.back_toytrade.validator.Validator;
 import jakarta.annotation.Resource;
@@ -12,6 +14,11 @@ import java.util.Optional;
 public class UserService {
     @Resource
     private UserRepository userRepository;
+    private final RoleRepository roleRepository;
+
+    public UserService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     public User findUser(String username, String password) {
         Optional<User> user = userRepository.findUser(username, password, Status.ACTIVE);
@@ -37,5 +44,9 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+
+    public List<Role> getAllRoles() {
+        return roleRepository.findAll();
     }
 }

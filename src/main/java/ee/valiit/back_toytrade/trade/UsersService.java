@@ -6,6 +6,7 @@ import ee.valiit.back_toytrade.domain.user.UserMapper;
 import ee.valiit.back_toytrade.domain.user.UserService;
 import ee.valiit.back_toytrade.domain.user.role.Role;
 import ee.valiit.back_toytrade.domain.user.role.RoleService;
+import ee.valiit.back_toytrade.trade.dto.UserRequest;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -40,19 +41,21 @@ public class UsersService {
         userService.saveUser(user);
     }
 
-    public void editUser(Integer userId, UserInfo userInfo) {
+    public void editUser(Integer userId, UserRequest userRequest) {
         User user = userService.findUser(userId);
-        userMapper.updateUser(userInfo, user);
-        updateRoleIfChanged(userInfo.getRoleName(), user);
+        userMapper.updateUser(userRequest, user);
+        updateRoleIfChanged(userRequest.getRoleId(), user);
         userService.saveUser(user);
     }
 
-    private void updateRoleIfChanged(String roleName, User user) {
-        if (!roleName.equals(user.getRole().getName())) {
-            Role role = roleService.findRole(roleName);
+    private void updateRoleIfChanged(Integer roleId, User user) {
+        if (!roleId.equals(user.getRole().getId())) {
+            Role role = roleService.findRole(roleId);
             user.setRole(role);
         }
     }
 
-
+    public List<Role> getAllRoles() {
+        return userService.getAllRoles();
+    }
 }

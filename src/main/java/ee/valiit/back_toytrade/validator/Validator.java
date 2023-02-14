@@ -7,8 +7,7 @@ import ee.valiit.back_toytrade.infrastructure.exception.DataNotFoundException;
 
 import java.util.Optional;
 
-import static ee.valiit.back_toytrade.validator.ErrorMessage.DUPLICATE_USERNAME;
-import static ee.valiit.back_toytrade.validator.ErrorMessage.INCORRECT_CREDENTIALS;
+import static ee.valiit.back_toytrade.validator.ErrorMessage.*;
 
 public class Validator {
     public static User getValidUser(Optional<User> user) {
@@ -22,6 +21,12 @@ public class Validator {
     public static void validateUserExists(boolean userExists) {
         if (userExists) {
             throw new BusinessException(DUPLICATE_USERNAME.getMessage(), DUPLICATE_USERNAME.getCode());
+        }
+    }
+
+    public static void validateCategoryExists(boolean categoryExists) {
+        if (categoryExists) {
+            throw new BusinessException(DUPLICATE_CATEGORY.getMessage(), DUPLICATE_CATEGORY.getCode());
         }
     }
 }

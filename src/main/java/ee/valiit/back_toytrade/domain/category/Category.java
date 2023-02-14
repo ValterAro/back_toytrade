@@ -1,9 +1,6 @@
 package ee.valiit.back_toytrade.domain.category;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -11,6 +8,7 @@ import jakarta.validation.constraints.Size;
 @Table(name = "category")
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -18,6 +16,10 @@ public class Category {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Size(max = 1)
+    @Column(name = "status", length = 1)
+    private String status;
 
     public Integer getId() {
         return id;
@@ -33,6 +35,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

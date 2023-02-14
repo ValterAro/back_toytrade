@@ -37,12 +37,11 @@ public interface ToyMapper {
         }
     }
 
-    @Mapping(source = "name", target = "name")
+
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source = "cityId", target = "city.id")
     @Mapping(source = "cityName", target = "city.name")
     @Mapping(source = "conditionId", target = "condition.id")
-    @Mapping(source = "description", target = "description")
     @Mapping(source = "categoryId", target = "category.id")
     @Mapping(constant = Status.ACTIVE, target = "status")
     @Mapping(source = "picture", target = "picture", qualifiedByName = "stringToByteArray")

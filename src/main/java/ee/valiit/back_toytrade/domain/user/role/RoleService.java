@@ -13,4 +13,7 @@ public class RoleService {
     }
 
 
+    public Role findRole(Integer roleId) {
+        return roleRepository.findById(roleId).get();
+    }
 }

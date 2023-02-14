@@ -1,10 +1,10 @@
 package ee.valiit.back_toytrade.trade;
 
 import ee.valiit.back_toytrade.trade.dto.CategoryDto;
+import ee.valiit.back_toytrade.trade.dto.NewCategoryRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +19,18 @@ public class CategoriesController {
     public List<CategoryDto> getAllCategories() {
         return categoriesService.getAllCategories();
     }
+
+    @PostMapping("/categories")
+    @Operation(summary = "Adds a new category", description = "Adds a new category to db table 'category'")
+    public void addCategory(@RequestBody NewCategoryRequest newCategoryRequest) {
+        categoriesService.addCategory(newCategoryRequest);
+    }
+
+    @DeleteMapping("/categories")
+    @Operation(summary = "Deletes category", description = "Category status is changed in database")
+    public void deleteCategory(@RequestParam Integer categoryId) {
+        categoriesService.deleteCategory(categoryId);
+    }
+
 
 }

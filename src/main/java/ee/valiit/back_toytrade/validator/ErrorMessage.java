@@ -6,7 +6,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorMessage {
     INCORRECT_CREDENTIALS("Vale kasutajanimi või parool", "600"),
-    DUPLICATE_USERNAME("Selline kasutajanimi on olemas", "400");
+    DUPLICATE_USERNAME("Selline kasutajanimi on olemas", "400"),
+    DUPLICATE_CATEGORY("Selline kategooria on olemas", "410");
 
 
     private String message;

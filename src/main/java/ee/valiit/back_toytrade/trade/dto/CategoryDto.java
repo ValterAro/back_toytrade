@@ -13,4 +13,5 @@ public class CategoryDto implements Serializable {
     private Integer categoryId;
     private String categoryName;
     private Boolean isSelected = false;
+    private String status;
 }

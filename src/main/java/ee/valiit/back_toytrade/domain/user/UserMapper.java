@@ -2,8 +2,9 @@ package ee.valiit.back_toytrade.domain.user;
 
 import ee.valiit.back_toytrade.trade.dto.LoginResponse;
 import ee.valiit.back_toytrade.trade.Status;
-import ee.valiit.back_toytrade.trade.dto.UserDto;
+import ee.valiit.back_toytrade.trade.dto.NewUserRequest;
 import ee.valiit.back_toytrade.trade.dto.UserInfo;
+import ee.valiit.back_toytrade.trade.dto.UserRequest;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -19,25 +20,16 @@ public interface UserMapper {
 
     @Mapping(constant = Status.ACTIVE, target = "status")
     @Mapping(constant = "3", target = "points")
-    User toEntity(UserDto userDto);
+    User toEntity(NewUserRequest newUserRequest);
 
-    @Mapping(constant = Status.ACTIVE, target = "status")
-    @Mapping(source = "points", target = "points")
-    User toEntity2(UserInfo userInfo);
-
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "username", target = "username")
+    @Mapping(source = "id", target = "userId")
     @Mapping(source = "role.name", target = "roleName")
-    @Mapping(source = "points", target = "points")
-    @Mapping(source = "mobile", target = "mobile")
-    @Mapping(source = "status", target = "status")
     UserInfo toInfo(User user);
 
     List<UserInfo> toInfos(List<User> users);
 
-    @InheritConfiguration(name = "toEntity2")
+    @Mapping(constant = Status.ACTIVE, target = "status")
+    @Mapping(source = "points", target = "points")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    User updateUser(UserInfo userInfo, @MappingTarget User user);
-
-
+    User updateUser(UserRequest userRequest, @MappingTarget User user);
 }
