@@ -15,14 +15,12 @@ import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.TerminalServi
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserMapper;
 import ee.valiit.back_toytrade.domain.user.UserService;
-import ee.valiit.back_toytrade.trade.dto.CategoryDto;
-import ee.valiit.back_toytrade.trade.dto.CityDto;
-import ee.valiit.back_toytrade.trade.dto.ConditionDto;
-import ee.valiit.back_toytrade.trade.dto.ToyDto;
+import ee.valiit.back_toytrade.trade.dto.*;
 import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,6 +144,36 @@ public class TradeService {
         toyTransaction.setTerminal(terminal);
         toyTransaction.setStatus(Status.WANTED);
         return toyTransaction;
+    }
+
+    public void editToy(Integer toyId, ToyEditRequest toyEditRequest) {
+        Toy toy = toyService.findToy(toyId);
+        toyMapper.updateToy(toyEditRequest, toy);
+        updateCityIfChanged(toy, toyEditRequest.getCityId());
+        updateCategoryIfChanged(toy, toyEditRequest.getCategoryId());
+        updateConditionIfChanged(toy, toyEditRequest.getConditionId());
+        toyService.saveToy(toy);
+    }
+
+    private void updateConditionIfChanged(Toy toy, Integer toyDtoConditionId) {
+        if (!toyDtoConditionId.equals(toy.getCondition().getId())) {
+            Optional<Condition> conditionById = conditionService.findConditionById(toyDtoConditionId);
+            toy.setCondition(conditionById.get());
+        }
+    }
+
+    private void updateCategoryIfChanged(Toy toy, Integer toyDtoCategoryId) {
+        if (!toyDtoCategoryId.equals(toy.getCategory().getId())) {
+            Optional<Category> categoryById = categoryService.findCategoryById(toyDtoCategoryId);
+            toy.setCategory(categoryById.get());
+        }
+    }
+
+    private void updateCityIfChanged(Toy toy, Integer toyDtoCityId) {
+        if (!toyDtoCityId.equals(toy.getCity().getId())) {
+            Optional<City> cityById = cityService.findCityById(toyDtoCityId);
+            toy.setCity(cityById.get());
+        }
     }
 
     public void setTransactionStatusSent(Integer toyTransactionId) {

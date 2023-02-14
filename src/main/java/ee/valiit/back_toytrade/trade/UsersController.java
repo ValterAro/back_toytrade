@@ -38,5 +38,4 @@ public class UsersController {
     public List<Role> getAllRoles() {
         return usersService.getAllRoles();
     }
-
 }

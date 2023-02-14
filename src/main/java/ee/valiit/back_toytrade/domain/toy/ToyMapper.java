@@ -2,6 +2,7 @@ package ee.valiit.back_toytrade.domain.toy;
 
 import ee.valiit.back_toytrade.trade.Status;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
+import ee.valiit.back_toytrade.trade.dto.ToyEditRequest;
 import org.mapstruct.*;
 
 import java.nio.charset.StandardCharsets;
@@ -12,9 +13,7 @@ import ee.valiit.back_toytrade.infrastructure.util.PictureUtil;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {PictureUtil.class})
 public interface ToyMapper {
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "description", target = "description")
+
     @Mapping(source = "category.id", target = "categoryId")
     @Mapping(source = "category.name", target = "categoryName")
     @Mapping(source = "condition.id", target = "conditionId")
@@ -55,4 +54,9 @@ public interface ToyMapper {
         byte[] bytes = picture.getBytes(StandardCharsets.UTF_8);
         return bytes;
     }
+
+    @Mapping(constant = Status.ACTIVE, target = "status")
+    @Mapping(source = "picture", target = "picture", qualifiedByName = "stringToByteArray")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Toy updateToy(ToyEditRequest toyEditRequest, @MappingTarget Toy toy);
 }
