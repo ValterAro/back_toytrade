@@ -24,11 +24,8 @@ INSERT INTO public.toy (id, user_id, city_id, condition_id, category_id, name, d
 INSERT INTO public.toy (id, user_id, city_id, condition_id, category_id, name, description, picture, status) VALUES (DEFAULT, 1, 2, 2, 2, 'Barbie nukk', 'Natuke kurb, sest Ken on kadnunud', '2', 'A');
 INSERT INTO public.toy (id, user_id, city_id, condition_id, category_id, name, description, picture, status) VALUES (DEFAULT, 2, 3, 3, 3, 'Legokomplekt Harry Potter', 'Paljukasutatud legokomplekt Harry Potteri võlumaailmast. Mõned klotsid puudu', '1', 'A');
 
-INSERT INTO public.terminal (id, name) VALUES (DEFAULT, 'Janseni Maxima DPD');
-INSERT INTO public.terminal (id, name) VALUES (DEFAULT, 'Tondi Selveri DPD');
-
-INSERT INTO public.toy_transaction (id, toy_id, seller_id, buyer_id, status, terminal_id) VALUES (DEFAULT, 1, 1, 2, 'W ', 1);
-INSERT INTO public.toy_transaction (id, toy_id, seller_id, buyer_id, status, terminal_id) VALUES (DEFAULT, 3, 2, 1, 'W ', 1);
+INSERT INTO public.toy_transaction (id, toy_id, seller_id, buyer_id, status, parcel_point) VALUES (DEFAULT, 1, 1, 2, 'W ', 'Tondi Selveri pakiautomaat');
+INSERT INTO public.toy_transaction (id, toy_id, seller_id, buyer_id, status, parcel_point) VALUES (DEFAULT, 3, 2, 1, 'W ', 'Jõe Prisma pakiautomaat');
 
 
 
