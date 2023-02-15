@@ -62,7 +62,7 @@ CREATE TABLE toy_transaction (
                                  seller_id int  NOT NULL,
                                  buyer_id int  NOT NULL,
                                  parcel_point varchar(255)  NOT NULL,
-                                 status char(2)  NOT NULL,
+                                 status varchar(255)  NOT NULL,
                                  CONSTRAINT toy_transaction_pk PRIMARY KEY (id)
 );
 
