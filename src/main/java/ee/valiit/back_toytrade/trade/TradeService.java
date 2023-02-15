@@ -26,6 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static ee.valiit.back_toytrade.trade.Status.PROCESS;
+import static ee.valiit.back_toytrade.trade.Status.WANTED;
+
 @Service
 public class TradeService {
 
@@ -146,9 +149,10 @@ public class TradeService {
         toyTransaction.setSeller(toy.getUser());
         toyTransaction.setBuyer(buyer);
         toyTransaction.setParcelPoint(parcelPoint);
-        toyTransaction.setStatus(Status.WANTED);
-        toyTransaction.getToy().setStatus(Status.PROCESS);
-//        toy.setStatus(Status.PROCESS); Pole kindel kas nii saaks ka
+        toyTransaction.setStatus(WANTED);
+//        toyTransaction.getToy().setStatus(PROCESS);
+
+        toy.setStatus(Status.PROCESS);
         return toyTransaction;
     }
 
