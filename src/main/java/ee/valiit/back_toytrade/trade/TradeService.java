@@ -20,6 +20,7 @@ import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,6 +126,10 @@ public class TradeService {
     }
     public Integer getMyPoints(Integer userId) {
         return userService.findUser(userId).getPoints();
+    }
+
+    public String getUsername(Integer userId) {
+        return userService.findUser(userId).getUsername();
     }
 
     public void addNewTransaction(ToyTransactionRequest toyTransactionRequest) {

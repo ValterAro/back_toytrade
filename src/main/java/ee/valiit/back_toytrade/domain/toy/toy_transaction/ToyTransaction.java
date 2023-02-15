@@ -32,16 +32,15 @@ public class ToyTransaction {
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;
 
-
-    @Size(max = 2)
-    @NotNull
-    @Column(name = "status", nullable = false, length = 2)
-    private String status;
-
-
     @Size(max = 255)
     @NotNull
     @Column(name = "parcel_point", nullable = false)
     private String parcelPoint;
+
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private String status;
+
 
 }

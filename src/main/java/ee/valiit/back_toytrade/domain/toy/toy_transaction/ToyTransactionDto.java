@@ -12,6 +12,8 @@ import java.io.Serializable;
 @Data
 public class ToyTransactionDto implements Serializable {
 
+    @NotNull
+    private  Integer transactionId;
     @Size(max = 255)
     @NotNull
     private String toyName;
@@ -24,9 +26,14 @@ public class ToyTransactionDto implements Serializable {
     @NotNull
     private String buyerUsername;
 
+    @Size(max = 15)
+    @NotNull
+    private String buyerMobile;
+
     @Size(max = 255)
     @NotNull
     private String parcelPoint;
+
     @Size(max = 2)
     @NotNull
     private String status;
