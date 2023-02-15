@@ -1,6 +1,6 @@
-INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Tallinn');
-INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Tartu');
-INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Kuressaare');
+INSERT INTO public.city (id, name, status) VALUES (DEFAULT, 'Tallinn', 'A');
+INSERT INTO public.city (id, name, status) VALUES (DEFAULT, 'Tartu', 'A');
+INSERT INTO public.city (id, name, status) VALUES (DEFAULT, 'Kuressaare', 'A');
 
 INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Autod','A');
 INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Nukud','A');
@@ -8,9 +8,9 @@ INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Legod','A');
 INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Lauamängud','A');
 INSERT INTO public.category (id, name, status) VALUES (DEFAULT, 'Klotsid','A');
 
-INSERT INTO public.condition (id, name) VALUES (DEFAULT, 'Nagu uus');
-INSERT INTO public.condition (id, name) VALUES (DEFAULT, 'Kulunud');
-INSERT INTO public.condition (id, name) VALUES (DEFAULT, 'Räsitud');
+INSERT INTO public.condition (id, name, status) VALUES (DEFAULT, 'Nagu uus', 'A');
+INSERT INTO public.condition (id, name, status) VALUES (DEFAULT, 'Kulunud', 'A');
+INSERT INTO public.condition (id, name, status) VALUES (DEFAULT, 'Räsitud', 'A');
 
 INSERT INTO public.role (id, name) VALUES (DEFAULT, 'admin');
 INSERT INTO public.role (id, name) VALUES (DEFAULT, 'user');

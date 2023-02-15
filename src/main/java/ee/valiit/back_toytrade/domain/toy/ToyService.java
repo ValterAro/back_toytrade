@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static ee.valiit.back_toytrade.trade.Status.ACTIVE;
+
 @Service
 public class ToyService {
 
@@ -16,11 +18,11 @@ public class ToyService {
     private ToyRepository toyRepository;
 
     public List<Toy> findActiveListedToys() {
-        return toyRepository.findActiveToys(Status.ACTIVE);
+        return toyRepository.findActiveToys(ACTIVE);
     }
 
     public List<Toy> findActiveListedToys(Integer categoryId) {
-        return toyRepository.findListedToys(categoryId, Status.ACTIVE);
+        return toyRepository.findListedToys(categoryId, ACTIVE);
     }
     public List<Toy> findToys(Integer userId){
     return toyRepository.findToys(userId);
