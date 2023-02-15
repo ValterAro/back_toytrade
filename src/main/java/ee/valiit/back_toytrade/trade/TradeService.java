@@ -147,6 +147,8 @@ public class TradeService {
         toyTransaction.setBuyer(buyer);
         toyTransaction.setParcelPoint(parcelPoint);
         toyTransaction.setStatus(Status.WANTED);
+        toyTransaction.getToy().setStatus(Status.PROCESS);
+//        toy.setStatus(Status.PROCESS); Pole kindel kas nii saaks ka
         return toyTransaction;
     }
 
@@ -192,6 +194,7 @@ public class TradeService {
         buyer.setPoints(buyer.getPoints() - 1);
         seller.setPoints(seller.getPoints() + 1);
         toyTransaction.setStatus(Status.COMPLETED);
+        toyTransaction.getToy().setStatus(Status.INACTIVE);
         toyTransactionService.saveToyTransaction(toyTransaction);
     }
 
