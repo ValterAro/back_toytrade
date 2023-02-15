@@ -105,7 +105,7 @@ public class TradeService {
         return toys;
     }
     public List<ToyDto> getMyToys(Integer userId) {
-        List<Toy> toys = toyService.findToys(userId);
+        List<Toy> toys = toyService.findActiveToys(userId);
         return toyMapper.toDtos(toys);
     }
 
@@ -147,8 +147,8 @@ public class TradeService {
         toyTransaction.setBuyer(buyer);
         toyTransaction.setParcelPoint(parcelPoint);
         toyTransaction.setStatus(Status.WANTED);
-        toyTransaction.getToy().setStatus(Status.PROCESS);
-//        toy.setStatus(Status.PROCESS); Pole kindel kas nii saaks ka
+//        toyTransaction.getToy().setStatus(Status.PROCESS);
+        toy.setStatus(Status.PROCESS);
         return toyTransaction;
     }
 
