@@ -22,12 +22,12 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static ee.valiit.back_toytrade.trade.Status.PROCESS;
-import static ee.valiit.back_toytrade.trade.Status.WANTED;
+import static ee.valiit.back_toytrade.trade.Status.*;
 
 @Service
 public class TradeService {
@@ -206,5 +206,15 @@ public class TradeService {
 //        User user = userService.findUser(userId);
         List<ToyTransaction> toyTransactions = toyTransactionService.findUserTransactions(userId);
         return toyTransactionMapper.toDtos(toyTransactions);
+    }
+
+    public void deleteToy(Integer toyId) {
+        Toy toy = toyService.findToy(toyId);
+        String currentName = toy.getName();
+        String newName = currentName + " (deactivated " + LocalDateTime.now() + ")";
+        toy.setName(newName);
+        toy.setStatus(DEACTIVATED);
+        toyService.saveToy(toy);
+
     }
 }

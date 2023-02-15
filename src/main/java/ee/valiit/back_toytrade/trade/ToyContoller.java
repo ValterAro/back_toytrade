@@ -32,5 +32,13 @@ public class ToyContoller {
         tradeService.editToy(toyId, toyEditRequest);
     }
 
+    @DeleteMapping("/toy")
+    @Operation(summary = "deletes toy by ID", description = "changes toy status and name")
+    public void deleteToy(@RequestParam Integer toyId) {
+
+        tradeService.deleteToy(toyId);
+    }
+
+
 
 }
