@@ -20,7 +20,6 @@ import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,9 +108,9 @@ public class TradeService {
         return toyMapper.toDtos(toys);
     }
 
-    public Toy findToy(Integer toyId) {
-        return toyService.findToy(toyId);
-
+    public ToyDto findToy(Integer toyId) {
+        Toy toy = toyService.findToy(toyId);
+        return toyMapper.toDto(toy);
     }
 
     public List<ConditionDto> getAllConditions() {
@@ -131,17 +130,17 @@ public class TradeService {
     public void addNewTransaction(ToyTransactionRequest toyTransactionRequest) {
         Toy toy = toyService.findToy(toyTransactionRequest.getToyId());
         User buyer = userService.findUser(toyTransactionRequest.getBuyerId());
-        Terminal terminal = terminalService.findTerminal(toyTransactionRequest.getTerminalId());
-        ToyTransaction toyTransaction = createToyTransaction(toy, buyer, terminal);
+        String parcelPoint = toyTransactionRequest.getParcelPoint();
+        ToyTransaction toyTransaction = createToyTransaction(toy, buyer, parcelPoint);
         toyTransactionService.saveToyTransaction(toyTransaction);
     }
 
-    private static ToyTransaction createToyTransaction(Toy toy, User buyer, Terminal terminal) {
+    private static ToyTransaction createToyTransaction(Toy toy, User buyer, String parcelPoint) {
         ToyTransaction toyTransaction = new ToyTransaction();
         toyTransaction.setToy(toy);
         toyTransaction.setSeller(toy.getUser());
         toyTransaction.setBuyer(buyer);
-        toyTransaction.setTerminal(terminal);
+        toyTransaction.setParcelPoint(parcelPoint);
         toyTransaction.setStatus(Status.WANTED);
         return toyTransaction;
     }

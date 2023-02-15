@@ -17,6 +17,8 @@ public class ToyDto implements Serializable {
     @Size(max = 255)
     @NotNull
     private  String userUsername;
+
+    private String userMobile;
     private  Integer cityId;
     @Size(max = 255)
     @NotNull

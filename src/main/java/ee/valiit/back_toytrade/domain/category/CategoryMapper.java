@@ -1,8 +1,10 @@
 package ee.valiit.back_toytrade.domain.category;
 
+import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.trade.Status;
 import ee.valiit.back_toytrade.trade.dto.CategoryDto;
 import ee.valiit.back_toytrade.trade.dto.NewCategoryRequest;
+import ee.valiit.back_toytrade.trade.dto.UserRequest;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -22,4 +24,7 @@ public interface CategoryMapper {
     @Mapping(constant = ACTIVE, target = "status")
     Category toEntity(NewCategoryRequest newCategoryRequest);
 
+    @InheritConfiguration(name = "toEntity")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Category updateCategory(NewCategoryRequest newCategoryRequest, @MappingTarget Category category);
 }

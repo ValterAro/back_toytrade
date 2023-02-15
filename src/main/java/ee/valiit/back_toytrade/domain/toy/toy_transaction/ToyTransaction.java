@@ -32,15 +32,16 @@ public class ToyTransaction {
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "terminal_id", nullable = false)
-    private Terminal terminal;
 
     @Size(max = 2)
     @NotNull
     @Column(name = "status", nullable = false, length = 2)
     private String status;
 
+
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "parcel_point", nullable = false)
+    private String parcelPoint;
 
 }

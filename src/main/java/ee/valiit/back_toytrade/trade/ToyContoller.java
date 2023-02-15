@@ -1,6 +1,5 @@
 package ee.valiit.back_toytrade.trade;
 
-import ee.valiit.back_toytrade.domain.toy.Toy;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import ee.valiit.back_toytrade.trade.dto.ToyEditRequest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +21,7 @@ public class ToyContoller {
 
     @GetMapping("/toy")
     @Operation(summary = "gets toys by ID", description = "gets toy name, description, location, condition, trading user, picture, category")
-    public Toy toyDto(@RequestParam Integer toyId){
+    public ToyDto toyDto(@RequestParam Integer toyId){
         return tradeService.findToy(toyId);
     }
 

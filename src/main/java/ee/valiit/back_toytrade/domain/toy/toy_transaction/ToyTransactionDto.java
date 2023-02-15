@@ -14,20 +14,20 @@ public class ToyTransactionDto implements Serializable {
 
     @Size(max = 255)
     @NotNull
-    private final String toyName;
+    private String toyName;
 
     @Size(max = 255)
     @NotNull
-    private final String sellerUsername;
+    private String sellerUsername;
 
     @Size(max = 255)
     @NotNull
-    private final String buyerUsername;
+    private String buyerUsername;
 
     @Size(max = 255)
     @NotNull
-    private final String terminalName;
+    private String parcelPoint;
     @Size(max = 2)
     @NotNull
-    private final String status;
+    private String status;
 }

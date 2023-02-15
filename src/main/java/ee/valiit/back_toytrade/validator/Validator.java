@@ -29,4 +29,16 @@ public class Validator {
             throw new BusinessException(DUPLICATE_CATEGORY.getMessage(), DUPLICATE_CATEGORY.getCode());
         }
     }
+
+    public static void validateConditionExists(boolean conditionExists) {
+        if(conditionExists) {
+            throw new BusinessException(DUPLICATE_CONDITION.getMessage(), DUPLICATE_CONDITION.getCode());
+        }
+    }
+
+    public static void validateCityExists(boolean cityExists) {
+        if(cityExists) {
+            throw new BusinessException(DUPLICATE_CITY.getMessage(), DUPLICATE_CITY.getCode());
+        }
+    }
 }

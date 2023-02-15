@@ -15,7 +15,7 @@ public interface ToyTransactionMapper {
     @Mapping(source = "toy.name", target = "toyName")
     @Mapping(source = "seller.username", target = "sellerUsername")
     @Mapping(source = "buyer.username", target = "buyerUsername")
-    @Mapping(source = "terminal.name", target = "terminalName")
+    @Mapping(source = "parcelPoint", target = "parcelPoint")
     ToyTransactionDto toDto(ToyTransaction toyTransaction);
 
 

@@ -17,6 +17,10 @@ public class City {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Size(max = 1)
+    @Column(name = "status", length = 1)
+    private String status;
+
     public Integer getId() {
         return id;
     }
@@ -33,4 +37,11 @@ public class City {
         this.name = name;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

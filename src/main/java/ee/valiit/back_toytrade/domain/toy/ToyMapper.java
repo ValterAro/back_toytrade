@@ -23,6 +23,7 @@ public interface ToyMapper {
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.username", target = "userUsername")
     @Mapping(source = "picture", target = "picture", qualifiedByName = "byteArrayToString")
+    @Mapping(source = "user.mobile", target = "userMobile")
     ToyDto toDto(Toy toy);
 
     List<ToyDto> toDtos(List<Toy> toys);

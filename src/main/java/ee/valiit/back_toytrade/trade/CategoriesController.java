@@ -32,5 +32,11 @@ public class CategoriesController {
         categoriesService.deleteCategory(categoryId);
     }
 
+    @PutMapping("/categories")
+    @Operation(summary = "Updates category name", description = "Category name is updated in database table 'category'")
+    public void updateCategory(@RequestParam Integer categoryId, @RequestBody NewCategoryRequest newCategoryRequest) {
+        categoriesService.editCategory(categoryId, newCategoryRequest);
+    }
+
 
 }

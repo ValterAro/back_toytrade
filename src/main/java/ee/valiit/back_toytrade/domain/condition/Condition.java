@@ -17,6 +17,8 @@ public class Condition {
     @Column(name = "name", nullable = false)
     private String name;
 
+    private String status;
+
     public Integer getId() {
         return id;
     }
@@ -33,4 +35,11 @@ public class Condition {
         this.name = name;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

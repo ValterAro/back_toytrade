@@ -47,4 +47,11 @@ public class CategoriesService {
         categoryService.saveCategory(category);
 
     }
+
+    public void editCategory(Integer categoryId,NewCategoryRequest newCategoryRequest) {
+        Category category = categoryService.findCategory(categoryId);
+        categoryMapper.updateCategory(newCategoryRequest, category);
+        categoryService.saveCategory(category);
+
+    }
 }
