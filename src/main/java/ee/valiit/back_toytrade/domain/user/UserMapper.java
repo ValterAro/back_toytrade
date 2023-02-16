@@ -12,11 +12,9 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface UserMapper {
 
-
     @Mapping(source = "id", target = "userId")
     @Mapping(source = "role.name", target = "roleName")
     LoginResponse toDto(User user);
-
 
     @Mapping(constant = Status.ACTIVE, target = "status")
     @Mapping(constant = "3", target = "points")
