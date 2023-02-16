@@ -32,4 +32,6 @@ public interface UserMapper {
     @Mapping(source = "points", target = "points")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     User updateUser(UserRequest userRequest, @MappingTarget User user);
+
+
 }

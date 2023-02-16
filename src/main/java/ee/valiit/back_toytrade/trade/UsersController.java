@@ -1,6 +1,7 @@
 package ee.valiit.back_toytrade.trade;
 
 import ee.valiit.back_toytrade.domain.user.role.Role;
+import ee.valiit.back_toytrade.trade.dto.NewUserRequest;
 import ee.valiit.back_toytrade.trade.dto.UserInfo;
 import ee.valiit.back_toytrade.trade.dto.UserRequest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,10 +22,15 @@ public class UsersController {
         return usersService.getAllUsers();
     }
 
-    @PutMapping("users")
+    @PutMapping("/users")
     @Operation(summary = "Updates user information", description = "Updates user information in db table 'user'")
     public void updateUser(@RequestParam Integer userId, @RequestBody UserRequest userRequest) {
         usersService.editUser(userId, userRequest);
+    }
+    @PutMapping("/my-user-edit")
+    @Operation(summary = "Updates user information", description = "Updates user information in db table 'user'")
+    public void updateUser(@RequestParam Integer userId, @RequestBody NewUserRequest userInfo) {
+        usersService.editMyUser(userId, userInfo);
     }
 
     @DeleteMapping("/users")
