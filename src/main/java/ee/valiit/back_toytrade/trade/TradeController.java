@@ -68,7 +68,6 @@ public class TradeController {
     public List<ToyTransactionDto> getMyTransactions(@RequestParam Integer userId) {
         return tradeService.findTransactions(userId);
     }
-
     @GetMapping("/my-username")
     @Operation(summary = "gets users username", description = "Gets users username from the user db based on int userId")
     public String getMyUsername(@RequestParam Integer userId) {

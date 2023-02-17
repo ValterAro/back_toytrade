@@ -67,4 +67,9 @@ public class UsersService {
         user.setUsername(userInfo.getUsername());
         userService.saveUser(user);
     }
+
+    public UserRequest getUserInfo(Integer userId) {
+        User user = userService.findUser(userId);
+        return userMapper.getUserInfo(user);
+    }
 }

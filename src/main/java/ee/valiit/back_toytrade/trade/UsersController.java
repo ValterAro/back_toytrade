@@ -44,4 +44,10 @@ public class UsersController {
     public List<Role> getAllRoles() {
         return usersService.getAllRoles();
     }
+
+    @GetMapping("/users/me")
+    @Operation(summary = "gets user profile info", description = "Gets users username and mobile from the user db based on userId")
+    public UserRequest getUserInfo(@RequestParam Integer userId) {
+        return usersService.getUserInfo(userId);
+    }
 }

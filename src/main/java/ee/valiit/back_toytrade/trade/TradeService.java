@@ -10,7 +10,6 @@ import ee.valiit.back_toytrade.domain.condition.ConditionMapper;
 import ee.valiit.back_toytrade.domain.condition.ConditionService;
 import ee.valiit.back_toytrade.domain.toy.Toy;
 import ee.valiit.back_toytrade.domain.toy.toy_transaction.*;
-import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.Terminal;
 import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.TerminalService;
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserMapper;
@@ -21,15 +20,16 @@ import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
+
 import java.time.LocalDateTime;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static ee.valiit.back_toytrade.trade.Status.*;
 
 @Service
 public class TradeService {
@@ -140,14 +140,12 @@ public class TradeService {
     public void addNewTransaction(ToyTransactionRequest toyTransactionRequest) {
         Toy toy = toyService.findToy(toyTransactionRequest.getToyId());
         User buyer = userService.findUser(toyTransactionRequest.getBuyerId());
-        if(buyer.getPoints() > 0) {
+        if (buyer.getPoints() > 0) {
             String parcelPoint = toyTransactionRequest.getParcelPoint();
             ToyTransaction toyTransaction = createToyTransaction(toy, buyer, parcelPoint);
             toyTransactionService.saveToyTransaction(toyTransaction);
         }
-
     }
-
     private static ToyTransaction createToyTransaction(Toy toy, User buyer, String parcelPoint) {
         ToyTransaction toyTransaction = new ToyTransaction();
         toyTransaction.setToy(toy);
@@ -220,5 +218,15 @@ public class TradeService {
 //        User user = userService.findUser(userId);
         List<ToyTransaction> toyTransactions = toyTransactionService.findUserTransactions(userId);
         return toyTransactionMapper.toDtos(toyTransactions);
+    }
+
+    public void deleteToy(Integer toyId) {
+        Toy toy = toyService.findToy(toyId);
+        String currentName = toy.getName();
+        String newName = currentName + " (deactivated " + LocalDateTime.now() + ")";
+        toy.setName(newName);
+        toy.setStatus(DEACTIVATED);
+        toyService.saveToy(toy);
+
     }
 }

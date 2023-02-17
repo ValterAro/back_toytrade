@@ -12,11 +12,9 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface UserMapper {
 
-
     @Mapping(source = "id", target = "userId")
     @Mapping(source = "role.name", target = "roleName")
     LoginResponse toDto(User user);
-
 
     @Mapping(constant = Status.ACTIVE, target = "status")
     @Mapping(constant = "3", target = "points")
@@ -33,5 +31,9 @@ public interface UserMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     User updateUser(UserRequest userRequest, @MappingTarget User user);
 
-
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "mobile", target = "mobile")
+    @Mapping(source = "points", target = "points")
+    @Mapping(source = "role.id", target = "roleId")
+    UserRequest getUserInfo(User user);
 }
