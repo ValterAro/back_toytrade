@@ -108,7 +108,7 @@ public class TradeService {
         return toys;
     }
     public List<ToyDto> getMyToys(Integer userId) {
-        List<Toy> toys = toyService.findToys(userId);
+        List<Toy> toys = toyService.findActiveToys(userId);
         return toyMapper.toDtos(toys);
     }
 

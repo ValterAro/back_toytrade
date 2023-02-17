@@ -28,6 +28,10 @@ public class ToyService {
     return toyRepository.findToys(userId);
     }
 
+    public List<Toy> findActiveToys(Integer userId) {
+        return toyRepository.findActiveToys(userId, ACTIVE);
+    }
+
     public void addNewToy(Toy toy) {
         toyRepository.save(toy);
     }

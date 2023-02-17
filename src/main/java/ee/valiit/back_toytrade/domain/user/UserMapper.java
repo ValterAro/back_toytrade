@@ -30,4 +30,10 @@ public interface UserMapper {
     @Mapping(source = "points", target = "points")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     User updateUser(UserRequest userRequest, @MappingTarget User user);
+
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "mobile", target = "mobile")
+    @Mapping(source = "points", target = "points")
+    @Mapping(source = "role.id", target = "roleId")
+    UserRequest getUserInfo(User user);
 }
