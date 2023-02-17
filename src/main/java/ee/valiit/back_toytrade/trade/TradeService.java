@@ -19,9 +19,12 @@ import ee.valiit.back_toytrade.trade.dto.*;
 import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -147,6 +150,7 @@ public class TradeService {
         toyTransaction.setBuyer(buyer);
         toyTransaction.setParcelPoint(parcelPoint);
         toyTransaction.setStatus(Status.WANTED);
+        toyTransaction.setTimeChanged(String.valueOf(LocalDateTime.now()));
 //        toyTransaction.getToy().setStatus(Status.PROCESS);
         toy.setStatus(Status.PROCESS);
         return toyTransaction;
@@ -183,9 +187,16 @@ public class TradeService {
     }
 
     public void setTransactionStatusSent(Integer toyTransactionId) {
-        ToyTransaction toytransaction = toyTransactionService.findById(toyTransactionId);
-        toytransaction.setStatus(Status.SENT);
-        toyTransactionService.saveToyTransaction(toytransaction);
+        ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
+        toyTransaction.setStatus(Status.SENT);
+//        LocalDateTime now = LocalDateTime.now();
+//        Timestamp timestamp = Timestamp.valueOf(now);
+//        DateTimeFormat
+//        toyTransaction.setTimeChanged(timestamp);
+//        DateTimeFormat newTime = LocalDateTime.now();
+//        toyTransaction.setTimeChanged(newTime);
+        toyTransaction.setTimeChanged(String.valueOf(LocalDateTime.now()));
+        toyTransactionService.saveToyTransaction(toyTransaction);
     }
     public void setTransactionStatusCompleted(Integer toyTransactionId) {
         ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
@@ -195,6 +206,7 @@ public class TradeService {
         seller.setPoints(seller.getPoints() + 1);
         toyTransaction.setStatus(Status.COMPLETED);
         toyTransaction.getToy().setStatus(Status.INACTIVE);
+        toyTransaction.setTimeChanged(String.valueOf(LocalDateTime.now()));
         toyTransactionService.saveToyTransaction(toyTransaction);
     }
 
