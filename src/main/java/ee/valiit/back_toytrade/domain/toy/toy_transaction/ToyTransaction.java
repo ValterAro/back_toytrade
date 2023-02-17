@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -31,6 +34,11 @@ public class ToyTransaction {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;
+
+
+    @NotNull
+    @Column(name = "timechanged", nullable = false)
+    private String timeChanged;
 
     @Size(max = 255)
     @NotNull

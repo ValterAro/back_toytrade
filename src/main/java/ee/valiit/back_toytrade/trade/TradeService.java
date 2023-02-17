@@ -10,7 +10,6 @@ import ee.valiit.back_toytrade.domain.condition.ConditionMapper;
 import ee.valiit.back_toytrade.domain.condition.ConditionService;
 import ee.valiit.back_toytrade.domain.toy.Toy;
 import ee.valiit.back_toytrade.domain.toy.toy_transaction.*;
-import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.Terminal;
 import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.TerminalService;
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserMapper;
@@ -20,9 +19,11 @@ import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.time.LocalDateTime;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -138,20 +139,21 @@ public class TradeService {
     public void addNewTransaction(ToyTransactionRequest toyTransactionRequest) {
         Toy toy = toyService.findToy(toyTransactionRequest.getToyId());
         User buyer = userService.findUser(toyTransactionRequest.getBuyerId());
-        String parcelPoint = toyTransactionRequest.getParcelPoint();
-        ToyTransaction toyTransaction = createToyTransaction(toy, buyer, parcelPoint);
-        toyTransactionService.saveToyTransaction(toyTransaction);
+        if (buyer.getPoints() > 0) {
+            String parcelPoint = toyTransactionRequest.getParcelPoint();
+            ToyTransaction toyTransaction = createToyTransaction(toy, buyer, parcelPoint);
+            toyTransactionService.saveToyTransaction(toyTransaction);
+        }
     }
-
     private static ToyTransaction createToyTransaction(Toy toy, User buyer, String parcelPoint) {
         ToyTransaction toyTransaction = new ToyTransaction();
         toyTransaction.setToy(toy);
         toyTransaction.setSeller(toy.getUser());
         toyTransaction.setBuyer(buyer);
         toyTransaction.setParcelPoint(parcelPoint);
-        toyTransaction.setStatus(WANTED);
-//        toyTransaction.getToy().setStatus(PROCESS);
-
+        toyTransaction.setStatus(Status.WANTED);
+        toyTransaction.setTimeChanged(formattedTimeNow());
+//        toyTransaction.getToy().setStatus(Status.PROCESS);
         toy.setStatus(Status.PROCESS);
         return toyTransaction;
     }
@@ -187,9 +189,10 @@ public class TradeService {
     }
 
     public void setTransactionStatusSent(Integer toyTransactionId) {
-        ToyTransaction toytransaction = toyTransactionService.findById(toyTransactionId);
-        toytransaction.setStatus(Status.SENT);
-        toyTransactionService.saveToyTransaction(toytransaction);
+        ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
+        toyTransaction.setStatus(Status.SENT);
+        toyTransaction.setTimeChanged(formattedTimeNow());
+        toyTransactionService.saveToyTransaction(toyTransaction);
     }
     public void setTransactionStatusCompleted(Integer toyTransactionId) {
         ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
@@ -199,7 +202,15 @@ public class TradeService {
         seller.setPoints(seller.getPoints() + 1);
         toyTransaction.setStatus(Status.COMPLETED);
         toyTransaction.getToy().setStatus(Status.INACTIVE);
+        toyTransaction.setTimeChanged(formattedTimeNow());
         toyTransactionService.saveToyTransaction(toyTransaction);
+    }
+
+    private static String formattedTimeNow() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        ZoneId zid = ZoneId.of("Europe/Tallinn");
+        LocalDateTime now = LocalDateTime.now(zid);
+        return now.format(format);
     }
 
     public List<ToyTransactionDto> findTransactions(Integer userId) {

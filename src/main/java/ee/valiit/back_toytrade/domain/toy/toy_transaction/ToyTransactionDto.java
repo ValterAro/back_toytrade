@@ -34,6 +34,9 @@ public class ToyTransactionDto implements Serializable {
     @NotNull
     private String parcelPoint;
 
+    @NotNull
+    private String timeChanged;
+
     @Size(max = 2)
     @NotNull
     private String status;
