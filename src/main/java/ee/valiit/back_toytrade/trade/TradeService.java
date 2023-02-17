@@ -25,6 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -150,7 +152,7 @@ public class TradeService {
         toyTransaction.setBuyer(buyer);
         toyTransaction.setParcelPoint(parcelPoint);
         toyTransaction.setStatus(Status.WANTED);
-        toyTransaction.setTimeChanged(String.valueOf(LocalDateTime.now()));
+        toyTransaction.setTimeChanged(formattedTimeNow());
 //        toyTransaction.getToy().setStatus(Status.PROCESS);
         toy.setStatus(Status.PROCESS);
         return toyTransaction;
@@ -189,13 +191,7 @@ public class TradeService {
     public void setTransactionStatusSent(Integer toyTransactionId) {
         ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
         toyTransaction.setStatus(Status.SENT);
-//        LocalDateTime now = LocalDateTime.now();
-//        Timestamp timestamp = Timestamp.valueOf(now);
-//        DateTimeFormat
-//        toyTransaction.setTimeChanged(timestamp);
-//        DateTimeFormat newTime = LocalDateTime.now();
-//        toyTransaction.setTimeChanged(newTime);
-        toyTransaction.setTimeChanged(String.valueOf(LocalDateTime.now()));
+        toyTransaction.setTimeChanged(formattedTimeNow());
         toyTransactionService.saveToyTransaction(toyTransaction);
     }
     public void setTransactionStatusCompleted(Integer toyTransactionId) {
@@ -206,8 +202,15 @@ public class TradeService {
         seller.setPoints(seller.getPoints() + 1);
         toyTransaction.setStatus(Status.COMPLETED);
         toyTransaction.getToy().setStatus(Status.INACTIVE);
-        toyTransaction.setTimeChanged(String.valueOf(LocalDateTime.now()));
+        toyTransaction.setTimeChanged(formattedTimeNow());
         toyTransactionService.saveToyTransaction(toyTransaction);
+    }
+
+    private static String formattedTimeNow() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        ZoneId zid = ZoneId.of("Europe/Tallinn");
+        LocalDateTime now = LocalDateTime.now(zid);
+        return now.format(format);
     }
 
     public List<ToyTransactionDto> findTransactions(Integer userId) {
