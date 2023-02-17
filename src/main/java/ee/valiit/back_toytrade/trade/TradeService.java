@@ -140,9 +140,12 @@ public class TradeService {
     public void addNewTransaction(ToyTransactionRequest toyTransactionRequest) {
         Toy toy = toyService.findToy(toyTransactionRequest.getToyId());
         User buyer = userService.findUser(toyTransactionRequest.getBuyerId());
-        String parcelPoint = toyTransactionRequest.getParcelPoint();
-        ToyTransaction toyTransaction = createToyTransaction(toy, buyer, parcelPoint);
-        toyTransactionService.saveToyTransaction(toyTransaction);
+        if(buyer.getPoints() > 0) {
+            String parcelPoint = toyTransactionRequest.getParcelPoint();
+            ToyTransaction toyTransaction = createToyTransaction(toy, buyer, parcelPoint);
+            toyTransactionService.saveToyTransaction(toyTransaction);
+        }
+
     }
 
     private static ToyTransaction createToyTransaction(Toy toy, User buyer, String parcelPoint) {
