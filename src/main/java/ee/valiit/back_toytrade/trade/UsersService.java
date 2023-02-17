@@ -1,6 +1,7 @@
 package ee.valiit.back_toytrade.trade;
 
 import ee.valiit.back_toytrade.domain.user.User;
+import ee.valiit.back_toytrade.trade.dto.NewUserRequest;
 import ee.valiit.back_toytrade.trade.dto.UserInfo;
 import ee.valiit.back_toytrade.domain.user.UserMapper;
 import ee.valiit.back_toytrade.domain.user.UserService;
@@ -57,5 +58,18 @@ public class UsersService {
 
     public List<Role> getAllRoles() {
         return userService.getAllRoles();
+    }
+
+    public void editMyUser(Integer userId, NewUserRequest userInfo) {
+        User user = userService.findUser(userId);
+        user.setMobile(userInfo.getMobile());
+        user.setPassword(userInfo.getPassword());
+        user.setUsername(userInfo.getUsername());
+        userService.saveUser(user);
+    }
+
+    public UserRequest getUserInfo(Integer userId) {
+        User user = userService.findUser(userId);
+        return userMapper.getUserInfo(user);
     }
 }
