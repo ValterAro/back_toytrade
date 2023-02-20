@@ -51,6 +51,4 @@ public class ToyTransaction {
     private String status;
 
 
-
-
 }

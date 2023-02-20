@@ -40,6 +40,4 @@ public class ToyTransactionDto implements Serializable {
     @Size(max = 2)
     @NotNull
     private String status;
-
-
 }
