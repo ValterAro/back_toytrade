@@ -1,10 +1,7 @@
 package ee.valiit.back_toytrade.domain.city;
 
-import ee.valiit.back_toytrade.domain.condition.Condition;
-import ee.valiit.back_toytrade.trade.Status;
 import ee.valiit.back_toytrade.trade.dto.CityDto;
 import ee.valiit.back_toytrade.trade.dto.NewCityRequest;
-import ee.valiit.back_toytrade.trade.dto.NewConditionRequest;
 import org.mapstruct.*;
 
 import java.util.List;

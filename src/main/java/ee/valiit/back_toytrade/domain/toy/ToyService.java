@@ -1,14 +1,8 @@
 package ee.valiit.back_toytrade.domain.toy;
 
-import ee.valiit.back_toytrade.trade.Status;
-import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
-import java.util.Optional;
-
 import static ee.valiit.back_toytrade.trade.Status.ACTIVE;
 
 @Service
@@ -17,23 +11,16 @@ public class ToyService {
     @Resource
     private ToyRepository toyRepository;
 
-    public List<Toy> findActiveListedToys() {
+    public List<Toy> findAllToys() {
         return toyRepository.findActiveToys(ACTIVE);
     }
 
-    public List<Toy> findActiveListedToys(Integer categoryId) {
-        return toyRepository.findListedToys(categoryId, ACTIVE);
-    }
-    public List<Toy> findToys(Integer userId){
-    return toyRepository.findToys(userId);
+    public List<Toy> findToysByCategory(Integer categoryId) {
+        return toyRepository.findToysByCategory(categoryId, ACTIVE);
     }
 
-    public List<Toy> findActiveToys(Integer userId) {
-        return toyRepository.findActiveToys(userId, ACTIVE);
-    }
-
-    public void addNewToy(Toy toy) {
-        toyRepository.save(toy);
+    public List<Toy> findUserToys(Integer userId) {
+        return toyRepository.findUserToys(userId, ACTIVE);
     }
 
     public Toy findToy(Integer toyId) {

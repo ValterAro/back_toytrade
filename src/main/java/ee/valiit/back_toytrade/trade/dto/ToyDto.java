@@ -12,34 +12,34 @@ import java.io.Serializable;
  */
 @Data
 public class ToyDto implements Serializable {
-    private  Integer id;
-    private  Integer userId;
+    private Integer id;
+    private Integer userId;
     @Size(max = 255)
     @NotNull
     private  String userUsername;
 
     private String userMobile;
-    private  Integer cityId;
+    private Integer cityId;
     @Size(max = 255)
     @NotNull
-    private  String cityName;
-    private  Integer conditionId;
+    private String cityName;
+    private Integer conditionId;
     @Size(max = 255)
     @NotNull
-    private  String conditionName;
-    private  Integer categoryId;
+    private String conditionName;
+    private Integer categoryId;
     @Size(max = 255)
     @NotNull
-    private  String categoryName;
+    private String categoryName;
     @Size(max = 255)
     @NotNull
-    private  String name;
+    private String name;
     @Size(max = 255)
     @NotNull
-    private  String description;
+    private String description;
     @NotNull
-    private  String picture;
+    private String picture;
     @Size(max = 1)
     @NotNull
-    private  String status;
+    private String status;
 }

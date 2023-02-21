@@ -4,15 +4,12 @@ import ee.valiit.back_toytrade.trade.Status;
 import ee.valiit.back_toytrade.trade.dto.ToyDto;
 import ee.valiit.back_toytrade.trade.dto.ToyEditRequest;
 import org.mapstruct.*;
-
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-
 import ee.valiit.back_toytrade.infrastructure.util.PictureUtil;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {PictureUtil.class})
 public interface ToyMapper {
-
 
     @Mapping(source = "category.id", target = "categoryId")
     @Mapping(source = "category.name", target = "categoryName")
@@ -36,7 +33,6 @@ public interface ToyMapper {
             return new String(picture);
         }
     }
-
 
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source = "cityId", target = "city.id")

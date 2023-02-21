@@ -8,7 +8,6 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface ToyTransactionMapper {
 
-
     @Mapping(constant = Status.COMPLETED, target = "status")
     ToyTransaction toEntity(ToyTransactionRequest toyTransactionRequest);
 
@@ -19,9 +18,5 @@ public interface ToyTransactionMapper {
     @Mapping(source = "id", target = "transactionId")
     ToyTransactionDto toDto(ToyTransaction toyTransaction);
 
-
     List<ToyTransactionDto> toDtos(List<ToyTransaction> toyTransactions);
-
-
-
 }

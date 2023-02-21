@@ -7,18 +7,18 @@ import lombok.Data;
 @Data
 public class ToyEditRequest {
 
-    private  Integer cityId;
-    private  Integer conditionId;
-    private  Integer categoryId;
+    private Integer cityId;
+    private Integer conditionId;
+    private Integer categoryId;
     @Size(max = 255)
     @NotNull
-    private  String name;
+    private String name;
     @Size(max = 255)
     @NotNull
-    private  String description;
+    private String description;
     @Size(max = 1)
     @NotNull
-    private  String status;
+    private String status;
 
     private String picture;
 

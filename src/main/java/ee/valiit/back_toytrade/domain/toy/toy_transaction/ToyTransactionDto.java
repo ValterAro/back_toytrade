@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class ToyTransactionDto implements Serializable {
 
     @NotNull
-    private  Integer transactionId;
+    private Integer transactionId;
     @Size(max = 255)
     @NotNull
     private String toyName;

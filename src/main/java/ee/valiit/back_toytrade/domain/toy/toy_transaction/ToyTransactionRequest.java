@@ -10,10 +10,10 @@ import java.io.Serializable;
 @Data
 public class ToyTransactionRequest implements Serializable {
 
-    private  Integer toyId;
+    private Integer toyId;
 
-    private  Integer buyerId;
+    private Integer buyerId;
 
-    private  String parcelPoint;
+    private String parcelPoint;
 
 }
