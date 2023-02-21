@@ -11,6 +11,7 @@ import ee.valiit.back_toytrade.domain.condition.ConditionService;
 import ee.valiit.back_toytrade.domain.toy.Toy;
 import ee.valiit.back_toytrade.domain.toy.toy_transaction.*;
 import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.TerminalService;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.transaction_status.TransactionStatus;
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserMapper;
 import ee.valiit.back_toytrade.domain.user.UserService;
@@ -19,6 +20,7 @@ import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.transaction_status.TransactionStatusService;
 
 
 import java.time.LocalDateTime;
@@ -65,6 +67,8 @@ public class TradeService {
 
     @Resource
     private ToyTransactionMapper toyTransactionMapper;
+
+    @Resource TransactionStatusService transactionStatusService;
 
     @Resource
     private TerminalService terminalService;
@@ -139,19 +143,21 @@ public class TradeService {
     public void addNewTransaction(ToyTransactionRequest toyTransactionRequest) {
         Toy toy = toyService.findToy(toyTransactionRequest.getToyId());
         User buyer = userService.findUser(toyTransactionRequest.getBuyerId());
+        TransactionStatus transactionStatus = transactionStatusService.findTransactionStatus(WANTED);
         if (buyer.getPoints() > 0) {
+            buyer.setPoints(buyer.getPoints() - 1);
             String parcelPoint = toyTransactionRequest.getParcelPoint();
-            ToyTransaction toyTransaction = createToyTransaction(toy, buyer, parcelPoint);
+            ToyTransaction toyTransaction = createToyTransaction(toy, buyer, parcelPoint, transactionStatus);
             toyTransactionService.saveToyTransaction(toyTransaction);
         }
     }
-    private static ToyTransaction createToyTransaction(Toy toy, User buyer, String parcelPoint) {
+    private static ToyTransaction createToyTransaction(Toy toy, User buyer, String parcelPoint, TransactionStatus transactionStatus) {
         ToyTransaction toyTransaction = new ToyTransaction();
         toyTransaction.setToy(toy);
         toyTransaction.setSeller(toy.getUser());
         toyTransaction.setBuyer(buyer);
         toyTransaction.setParcelPoint(parcelPoint);
-        toyTransaction.setStatus(Status.WANTED);
+        toyTransaction.setTransactionStatus(transactionStatus);
         toyTransaction.setTimeChanged(formattedTimeNow());
 //        toyTransaction.getToy().setStatus(Status.PROCESS);
         toy.setStatus(Status.PROCESS);
@@ -190,17 +196,17 @@ public class TradeService {
 
     public void setTransactionStatusSent(Integer toyTransactionId) {
         ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
-        toyTransaction.setStatus(Status.SENT);
+        toyTransaction.setTransactionStatus(transactionStatusService.findTransactionStatus(SENT));
         toyTransaction.setTimeChanged(formattedTimeNow());
         toyTransactionService.saveToyTransaction(toyTransaction);
     }
     public void setTransactionStatusCompleted(Integer toyTransactionId) {
         ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
-        User buyer = userService.findUser(toyTransaction.getBuyer().getId());
+//        User buyer = userService.findUser(toyTransaction.getBuyer().getId());
         User seller = userService.findUser(toyTransaction.getSeller().getId());
-        buyer.setPoints(buyer.getPoints() - 1);
+//        buyer.setPoints(buyer.getPoints() - 1);
         seller.setPoints(seller.getPoints() + 1);
-        toyTransaction.setStatus(Status.COMPLETED);
+        toyTransaction.setTransactionStatus(transactionStatusService.findTransactionStatus(COMPLETED));
         toyTransaction.getToy().setStatus(Status.INACTIVE);
         toyTransaction.setTimeChanged(formattedTimeNow());
         toyTransactionService.saveToyTransaction(toyTransaction);

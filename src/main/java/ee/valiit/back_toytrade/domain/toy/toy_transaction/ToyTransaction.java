@@ -1,15 +1,12 @@
 package ee.valiit.back_toytrade.domain.toy.toy_transaction;
 
 import ee.valiit.back_toytrade.domain.toy.Toy;
-import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.Terminal;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.transaction_status.TransactionStatus;
 import ee.valiit.back_toytrade.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -45,10 +42,10 @@ public class ToyTransaction {
     @Column(name = "parcel_point", nullable = false)
     private String parcelPoint;
 
-    @Size(max = 255)
     @NotNull
-    @Column(name = "status", nullable = false)
-    private String status;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "transaction_status_id", nullable = false)
+    private TransactionStatus transactionStatus;
 
 
 }

@@ -37,7 +37,7 @@ public class ToyTransactionDto implements Serializable {
     @NotNull
     private String timeChanged;
 
-    @Size(max = 2)
+    @Size(max = 255)
     @NotNull
-    private String status;
+    private String transactionStatusName;
 }
