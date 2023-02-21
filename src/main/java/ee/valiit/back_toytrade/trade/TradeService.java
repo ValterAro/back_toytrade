@@ -2,6 +2,7 @@ package ee.valiit.back_toytrade.trade;
 
 import ee.valiit.back_toytrade.domain.toy.Toy;
 import ee.valiit.back_toytrade.domain.toy.toy_transaction.*;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.transaction_status.TransactionStatus;
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserService;
 import ee.valiit.back_toytrade.trade.dto.*;
@@ -9,11 +10,16 @@ import ee.valiit.back_toytrade.domain.toy.ToyMapper;
 import ee.valiit.back_toytrade.domain.toy.ToyService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import ee.valiit.back_toytrade.domain.toy.toy_transaction.transaction_status.TransactionStatusService;
+
+
 import java.time.LocalDateTime;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ee.valiit.back_toytrade.trade.Status.*;
 
 @Service
 public class TradeService {
@@ -23,6 +29,7 @@ public class TradeService {
 
     @Resource
     private UserService userService;
+
     @Resource
     private ToyTransactionService toyTransactionService;
 
@@ -31,6 +38,9 @@ public class TradeService {
 
     @Resource
     private ToyTransactionMapper toyTransactionMapper;
+
+    @Resource
+    private TransactionStatusService transactionStatusService;
 
     public List<ToyDto> getAllToys() {
         List<Toy> toys = toyService.findAllToys();
@@ -54,7 +64,7 @@ public class TradeService {
 
     public void setTransactionStatusSent(Integer toyTransactionId) {
         ToyTransaction toyTransaction = toyTransactionService.findById(toyTransactionId);
-        toyTransaction.setStatus(Status.SENT);
+        toyTransaction.setTransactionStatus(transactionStatusService.findTransactionStatus(SENT));
         toyTransaction.setTimeChanged(formattedTimeNow());
         toyTransactionService.saveToyTransaction(toyTransaction);
     }
@@ -91,7 +101,7 @@ public class TradeService {
             toyTransaction.setSeller(toy.getUser());
             toyTransaction.setBuyer(buyer);
             toyTransaction.setParcelPoint(parcelPoint);
-            toyTransaction.setStatus(Status.WANTED);
+            toyTransaction.setTransactionStatus(transactionStatusService.findTransactionStatus(WANTED));
             toyTransaction.setTimeChanged(formattedTimeNow());
             toy.setStatus(Status.PROCESS);
             toyTransactionService.saveToyTransaction(toyTransaction);
@@ -112,8 +122,8 @@ public class TradeService {
         seller.setPoints(seller.getPoints() + 1);
     }
 
-    private static void setTransactionStatusAndTime(ToyTransaction toyTransaction) {
-        toyTransaction.setStatus(Status.COMPLETED);
+    private void setTransactionStatusAndTime(ToyTransaction toyTransaction) {
+        toyTransaction.setTransactionStatus(transactionStatusService.findTransactionStatus(COMPLETED));
         toyTransaction.getToy().setStatus(Status.INACTIVE);
         toyTransaction.setTimeChanged(formattedTimeNow());
     }
