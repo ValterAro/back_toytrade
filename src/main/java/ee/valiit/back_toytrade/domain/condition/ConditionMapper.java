@@ -1,12 +1,9 @@
 package ee.valiit.back_toytrade.domain.condition;
-import ee.valiit.back_toytrade.domain.category.Category;
+
 import ee.valiit.back_toytrade.trade.dto.ConditionDto;
-import ee.valiit.back_toytrade.trade.dto.NewCategoryRequest;
 import ee.valiit.back_toytrade.trade.dto.NewConditionRequest;
 import org.mapstruct.*;
-
 import java.util.List;
-
 import static ee.valiit.back_toytrade.trade.Status.ACTIVE;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
@@ -24,5 +21,4 @@ public interface ConditionMapper {
     @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Condition updateCondition(NewConditionRequest newConditionRequest, @MappingTarget Condition condition);
-
 }

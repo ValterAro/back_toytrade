@@ -1,17 +1,15 @@
 package ee.valiit.back_toytrade.domain.toy.toy_transaction;
 
 import ee.valiit.back_toytrade.domain.toy.Toy;
-import ee.valiit.back_toytrade.domain.toy.toy_transaction.terminal.Terminal;
 import ee.valiit.back_toytrade.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
-
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "toy_transaction")
 public class ToyTransaction {
@@ -35,7 +33,6 @@ public class ToyTransaction {
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;
 
-
     @NotNull
     @Column(name = "timechanged", nullable = false)
     private String timeChanged;
@@ -49,6 +46,5 @@ public class ToyTransaction {
     @NotNull
     @Column(name = "status", nullable = false)
     private String status;
-
 
 }

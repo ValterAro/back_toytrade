@@ -9,5 +9,4 @@ public class BackToytradeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackToytradeApplication.class, args);
 	}
-
 }

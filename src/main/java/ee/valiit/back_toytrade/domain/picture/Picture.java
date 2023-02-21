@@ -3,8 +3,12 @@ package ee.valiit.back_toytrade.domain.picture;
 import ee.valiit.back_toytrade.domain.toy.Toy;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "picture")
 public class Picture {
     @Id
@@ -20,29 +24,4 @@ public class Picture {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "toy_id", nullable = false)
     private Toy toy;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
-    }
-
-    public Toy getToy() {
-        return toy;
-    }
-
-    public void setToy(Toy toy) {
-        this.toy = toy;
-    }
-
 }
