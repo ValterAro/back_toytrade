@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-02-15 08:40:53.471
+-- Last modification date: 2023-02-21 08:46:52.871
 
 -- tables
 -- Table: category
@@ -62,9 +62,16 @@ CREATE TABLE toy_transaction (
                                  seller_id int  NOT NULL,
                                  buyer_id int  NOT NULL,
                                  parcel_point varchar(255)  NOT NULL,
-                                 timechanged varchar(255) NOT NULL,
-                                 status varchar(255)  NOT NULL,
+                                 timechanged varchar(255)  NOT NULL,
+                                 transaction_status_id int  NOT NULL,
                                  CONSTRAINT toy_transaction_pk PRIMARY KEY (id)
+);
+
+-- Table: transaction_status
+CREATE TABLE transaction_status (
+                                    id serial  NOT NULL,
+                                    name varchar(255)  NOT NULL,
+                                    CONSTRAINT transaction_status_pk PRIMARY KEY (id)
 );
 
 -- Table: user
@@ -108,6 +115,14 @@ ALTER TABLE toy ADD CONSTRAINT toy_city
 ALTER TABLE toy ADD CONSTRAINT toy_condition
     FOREIGN KEY (condition_id)
         REFERENCES condition (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: toy_transaction_Status (table: toy_transaction)
+ALTER TABLE toy_transaction ADD CONSTRAINT toy_transaction_Status
+    FOREIGN KEY (transaction_status_id)
+        REFERENCES transaction_status (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
