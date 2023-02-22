@@ -1,7 +1,5 @@
 package ee.valiit.back_toytrade.infrastructure.util;
 
-import java.nio.charset.StandardCharsets;
-
 public class PictureUtil {
 
 
@@ -12,8 +10,5 @@ public class PictureUtil {
             return new String(byteArray);
         }
     }
-//        One liner ternary
-//        return byteArray == null ? null : new String(byteArray);
-
-    }
+}
 

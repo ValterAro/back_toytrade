@@ -4,7 +4,6 @@ import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.infrastructure.exception.BusinessException;
 import ee.valiit.back_toytrade.infrastructure.exception.DataNotFoundException;
 
-
 import java.util.Optional;
 
 import static ee.valiit.back_toytrade.validator.ErrorMessage.*;
@@ -15,7 +14,6 @@ public class Validator {
             throw new DataNotFoundException(INCORRECT_CREDENTIALS.getMessage(), INCORRECT_CREDENTIALS.getCode());
         }
         return user.get();
-
     }
 
     public static void validateUserExists(boolean userExists) {

@@ -1,4 +1,4 @@
-package ee.valiit.back_toytrade.trade;
+package ee.valiit.back_toytrade.trade.user;
 
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.trade.dto.NewUserRequest;
@@ -10,7 +10,6 @@ import ee.valiit.back_toytrade.domain.user.role.RoleService;
 import ee.valiit.back_toytrade.trade.dto.UserRequest;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,13 +32,9 @@ public class UsersService {
         return userMapper.toInfos(allUsers);
     }
 
-    public void deleteUser(Integer userId) {
+    public UserRequest getUserInfo(Integer userId) {
         User user = userService.findUser(userId);
-        String currentUsername = user.getUsername();
-        String newUsername = currentUsername + " (deactivated: " + LocalDateTime.now() + ")";
-        user.setUsername(newUsername);
-        user.setStatus(DEACTIVATED);
-        userService.saveUser(user);
+        return userMapper.getUserInfo(user);
     }
 
     public void editUser(Integer userId, UserRequest userRequest) {
@@ -49,6 +44,37 @@ public class UsersService {
         userService.saveUser(user);
     }
 
+    public void deleteUser(Integer userId) {
+        User user = userService.findUser(userId);
+        addTimestampToUsername(user);
+        user.setStatus(DEACTIVATED);
+        userService.saveUser(user);
+    }
+
+    public void editMyUser(Integer userId, NewUserRequest userInfo) {
+        User user = userService.findUser(userId);
+        updateUserInfo(userInfo, user);
+        userService.saveUser(user);
+    }
+
+    public String getUsername(Integer userId) {
+        return userService.findUser(userId).getUsername();
+    }
+
+    public Integer getMyPoints(Integer userId) {
+        return userService.findUser(userId).getPoints();
+    }
+
+    public List<Role> getAllRoles() {
+        return userService.getAllRoles();
+    }
+
+    private static void updateUserInfo(NewUserRequest userInfo, User user) {
+        user.setMobile(userInfo.getMobile());
+        user.setPassword(userInfo.getPassword());
+        user.setUsername(userInfo.getUsername());
+    }
+
     private void updateRoleIfChanged(Integer roleId, User user) {
         if (!roleId.equals(user.getRole().getId())) {
             Role role = roleService.findRole(roleId);
@@ -56,20 +82,9 @@ public class UsersService {
         }
     }
 
-    public List<Role> getAllRoles() {
-        return userService.getAllRoles();
-    }
-
-    public void editMyUser(Integer userId, NewUserRequest userInfo) {
-        User user = userService.findUser(userId);
-        user.setMobile(userInfo.getMobile());
-        user.setPassword(userInfo.getPassword());
-        user.setUsername(userInfo.getUsername());
-        userService.saveUser(user);
-    }
-
-    public UserRequest getUserInfo(Integer userId) {
-        User user = userService.findUser(userId);
-        return userMapper.getUserInfo(user);
+    private static void addTimestampToUsername(User user) {
+        String currentUsername = user.getUsername();
+        String newUsername = currentUsername + " (deactivated: " + LocalDateTime.now() + ")";
+        user.setUsername(newUsername);
     }
 }

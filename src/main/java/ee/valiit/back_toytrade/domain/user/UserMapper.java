@@ -6,7 +6,6 @@ import ee.valiit.back_toytrade.trade.dto.NewUserRequest;
 import ee.valiit.back_toytrade.trade.dto.UserInfo;
 import ee.valiit.back_toytrade.trade.dto.UserRequest;
 import org.mapstruct.*;
-
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
@@ -27,13 +26,9 @@ public interface UserMapper {
     List<UserInfo> toInfos(List<User> users);
 
     @Mapping(constant = Status.ACTIVE, target = "status")
-    @Mapping(source = "points", target = "points")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     User updateUser(UserRequest userRequest, @MappingTarget User user);
 
-    @Mapping(source = "username", target = "username")
-    @Mapping(source = "mobile", target = "mobile")
-    @Mapping(source = "points", target = "points")
     @Mapping(source = "role.id", target = "roleId")
     UserRequest getUserInfo(User user);
 }

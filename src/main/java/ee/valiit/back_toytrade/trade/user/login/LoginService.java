@@ -1,4 +1,4 @@
-package ee.valiit.back_toytrade.trade.login;
+package ee.valiit.back_toytrade.trade.user.login;
 
 import ee.valiit.back_toytrade.domain.user.User;
 import ee.valiit.back_toytrade.domain.user.UserMapper;
@@ -23,20 +23,29 @@ public class LoginService {
     @Resource
     private UserMapper userMapper;
 
-
     public LoginResponse login(String username, String password) {
         User user = userService.findUser(username, password);
         return userMapper.toDto(user);
-
     }
 
     public void addNewUser(NewUserRequest newUserRequest) {
-        boolean userExists = userService.userExists(newUserRequest.getUsername());
-        Validator.validateUserExists(userExists);
-        User user = userMapper.toEntity(newUserRequest);
-        Role role = roleService.findRole("user");
-        user.setRole(role);
-       userService.addNewUser(user);
+        checkIfUsernameTaken(newUserRequest);
+        createAndSaveUser(newUserRequest);
     }
 
+    private void checkIfUsernameTaken(NewUserRequest newUserRequest) {
+        boolean userExists = userService.userExists(newUserRequest.getUsername());
+        Validator.validateUserExists(userExists);
+    }
+
+    private void createAndSaveUser(NewUserRequest newUserRequest) {
+        User user = userMapper.toEntity(newUserRequest);
+        setUserRole(user);
+        userService.saveUser(user);
+    }
+
+    private void setUserRole(User user) {
+        Role role = roleService.findRole("user");
+        user.setRole(role);
+    }
 }

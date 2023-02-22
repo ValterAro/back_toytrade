@@ -32,7 +32,6 @@ public class ToyTransaction {
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;
 
-
     @NotNull
     @Column(name = "timechanged", nullable = false)
     private String timeChanged;
