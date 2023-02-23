@@ -69,6 +69,11 @@ public class UsersService {
         return userService.getAllRoles();
     }
 
+    public UserInfo getUser(Integer userId) {
+        return userMapper.toInfo(userService.getUser(userId));
+
+    }
+
     private static void updateUserInfo(NewUserRequest userInfo, User user) {
         user.setMobile(userInfo.getMobile());
         user.setPassword(userInfo.getPassword());
