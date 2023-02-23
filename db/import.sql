@@ -31,3 +31,16 @@ INSERT INTO public.transaction_status (id, name) VALUES (DEFAULT, 'Lõpetatud');
 
 INSERT INTO public.toy_transaction (id, toy_id, seller_id, buyer_id, timechanged, transaction_status_id, parcel_point) VALUES (DEFAULT, 1, 1, 2, '25-10-1990 10:23:54', 2,'Tondi Selveri pakiautomaat');
 INSERT INTO public.toy_transaction (id, toy_id, seller_id, buyer_id, timechanged, transaction_status_id, parcel_point) VALUES (DEFAULT, 3, 2, 1, '24-10-1992 10:23:54', 1,'Jõe Prisma pakiautomaat');
+
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 1, 3, 'tere kas saab m2nguajsa', 'A', '2023-02-21 13:34:55.780000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 3, 1, 'mul on h2sti kiire', 'A', '2023-02-21 13:34:55.780000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 1, 3, 'ei saa sest mul ei ole kiire', 'A', '2023-02-21 13:35:42.261000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 1, 3, 'ja kus asute', 'A', '2023-02-21 13:35:42.261000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 3, 1, 'nii', 'A', '2023-02-21 13:39:20.819000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 3, 1, 'okei', 'A', '2023-02-21 14:50:34.125000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 2, 1, 'hahha', 'A', '2023-02-21 14:50:34.125000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 2, 3, 'niii', 'A', '2023-02-21 17:34:32.768000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 1, 3, '', 'A', '2023-02-21 18:31:47.698000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 1, 2, 'hehehehehe', 'A', '2023-02-22 10:40:19.369000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 1, 3, 'kyll on tore vestelda', 'A', '2023-02-22 10:40:36.601000');
+INSERT INTO public.message (id, sender_id, receiver_id, message, status, created_at) VALUES (DEFAULT, 1, 3, 'iseendaga', 'A', '2023-02-22 10:40:36.601000');

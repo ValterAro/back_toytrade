@@ -99,6 +99,7 @@ public class TradeService {
             ToyTransaction toyTransaction = new ToyTransaction();
             toyTransaction.setToy(toy);
             toyTransaction.setSeller(toy.getUser());
+            buyer.setPoints(buyer.getPoints() - 1);
             toyTransaction.setBuyer(buyer);
             toyTransaction.setParcelPoint(parcelPoint);
             toyTransaction.setTransactionStatus(transactionStatusService.findTransactionStatus(WANTED));
@@ -116,9 +117,7 @@ public class TradeService {
     }
 
     private void transferTradePoints(ToyTransaction toyTransaction) {
-        User buyer = userService.findUser(toyTransaction.getBuyer().getId());
         User seller = userService.findUser(toyTransaction.getSeller().getId());
-        buyer.setPoints(buyer.getPoints() - 1);
         seller.setPoints(seller.getPoints() + 1);
     }
 

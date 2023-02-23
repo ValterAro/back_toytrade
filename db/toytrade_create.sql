@@ -85,6 +85,15 @@ CREATE TABLE "user" (
                         status char(1)  NOT NULL,
                         CONSTRAINT id PRIMARY KEY (id)
 );
+CREATE TABLE message (
+                                 id serial  NOT NULL,
+                                 sender_id int  NOT NULL,
+                                 receiver_id int  NOT NULL,
+                                 message varchar(255)  NOT NULL,
+                                 status char(80)  NOT NULL,
+                                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                 CONSTRAINT message_pk PRIMARY KEY (id)
+);
 
 -- foreign keys
 -- Reference: picture_toy (table: picture)
@@ -166,6 +175,19 @@ ALTER TABLE "user" ADD CONSTRAINT user_role
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
+ALTER TABLE message ADD CONSTRAINT message_receiver
+    FOREIGN KEY (receiver_id)
+        REFERENCES "user" (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
 
--- End of file.
+-- Reference: toy_transaction_seller (table: toy_transaction)
+ALTER TABLE message ADD CONSTRAINT message_sender
+    FOREIGN KEY (sender_id)
+        REFERENCES "user" (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
 

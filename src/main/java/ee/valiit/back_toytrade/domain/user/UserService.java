@@ -40,4 +40,9 @@ public class UserService {
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
+
+    public User getUser(Integer userId) {
+        User user = userRepository.findById(userId).get();
+        return user;
+    }
 }

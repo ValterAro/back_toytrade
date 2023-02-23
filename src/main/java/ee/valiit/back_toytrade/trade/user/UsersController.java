@@ -64,5 +64,10 @@ public class UsersController {
         return usersService.getAllRoles();
     }
 
+    @GetMapping("/id")
+    @Operation(summary = "Gets user by id", description = "find user by id")
+    public UserInfo getUser(@RequestParam Integer userId) {
+        return usersService.getUser(userId);
+    }
 
 }
