@@ -90,7 +90,7 @@ CREATE TABLE message (
                                  sender_id int  NOT NULL,
                                  receiver_id int  NOT NULL,
                                  message varchar(255)  NOT NULL,
-                                 status char(80)  NOT NULL,
+                                 status char(1)  NOT NULL,
                                  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                  CONSTRAINT message_pk PRIMARY KEY (id)
 );
