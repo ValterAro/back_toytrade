@@ -26,14 +26,6 @@ CREATE TABLE condition (
                            CONSTRAINT condition_pk PRIMARY KEY (id)
 );
 
--- Table: picture
-CREATE TABLE picture (
-                         id serial  NOT NULL,
-                         data bytea  NOT NULL,
-                         toy_id int  NOT NULL,
-                         CONSTRAINT picture_pk PRIMARY KEY (id)
-);
-
 -- Table: role
 CREATE TABLE role (
                       id serial  NOT NULL,
@@ -96,14 +88,6 @@ CREATE TABLE message (
 );
 
 -- foreign keys
--- Reference: picture_toy (table: picture)
-ALTER TABLE picture ADD CONSTRAINT picture_toy
-    FOREIGN KEY (toy_id)
-        REFERENCES toy (id)
-        NOT DEFERRABLE
-            INITIALLY IMMEDIATE
-;
-
 -- Reference: toy_category (table: toy)
 ALTER TABLE toy ADD CONSTRAINT toy_category
     FOREIGN KEY (category_id)
@@ -189,5 +173,3 @@ ALTER TABLE message ADD CONSTRAINT message_sender
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
-
-
